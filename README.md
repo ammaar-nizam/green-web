@@ -1,48 +1,66 @@
-# Wildlife and Forestry Complaints and Incidents Management System
+# Wildlife, Forestry and Environmental Complaint Management System
 
-This repository contains a collection of microservices for a Wildlife and Forestry Complaints and Incidents Management System, designed to handle complaints, incidents, and investigations related to wildlife, forestry, and environmental crimes.
+This project aims to create a comprehensive complaint management system for wildlife, forestry, and environmental-related issues. This is created for our module, Software Development Practice assessment taken at Kingston University, UK. It consists of a Node.js and Express.js backend for API development, a React.js frontend, and MySQL for the database.
 
-## Microservices
+## Features
 
-### Microservice 1: complaint-management
+- **User Roles**: Admin, Public Users, Beat Officers with different privileges
+- **Complaint Management**: Register and manage complaints, investigations, and notifications
+- **Institutional Management**: Manage wildlife, forestry, branches, divisions, and beat offices
+- **Authentication & Authorization**: Secure user authentication and role-based access control
 
-Description: Handles the submission and management of complaints by the public.
+## Project Structure
 
-### Microservice 2: notification-management
+The project follows a structured organization:
+- **Backend (Node.js)**
+  - `src/controllers`: handles HTTP requests, interacts with services, and returns responses.
+  - `src/models`: represents database models using Mongoose or any ORM.
+  - `src/routes`: defines API routes using Express.js.
+  - `src/services`: business logic implementations that interact with models and perform operations.
+  - `src/middleware`: custom middleware functions like authentication and authorization.
+  - `src/utils`: utility functions like validation, formatting, etc.
+  - `src/app.js`: this is where the application starts and sets up the Express server and middleware.
+  - `src/config.js`: all the configuration variables like environment variables, database connections, etc.
 
-Description: Responsible for sending notifications and updating users about complaint status changes.
+- **Frontend (React.js)**
+  - Frontend Implementation.
 
-### Microservice 3: reporting-and-dashboard
+- **Database (MySQL)**
+  - Database schema and scripts.
 
-Description: Manages reporting and dashboards.
+- **Tests**
+  - Unit and integration tests.
 
-### Microservice 4: security-management
+## How to setup the project
 
-Description: Handles security measures, authentication, and device-based authentication for field officers.
+1. **Clone the Repository**
 
-### Microservice 5: user-management
-
-Description: Manages user authentication, roles, and permissions.
-
-## Shared Resources
-
-The `shared-resources` directory includes common utilities, configurations, and shared code used across multiple microservices.
-
-## Usage
-
-### Prerequisites
-
-- Java Development Kit 17 (JDK-17)
-- Maven
-- 
-
-### Installation and Running
-
-1. Clone the repository:
    ```bash
-   git clone https://github.com/ammaar-nizam/enviro-watch.git
+   git clone https://github.com/ammaar-nizam/green-web.git
+   cd green-web
 
-2. 
+2. **Install Dependencies**
+   ```bash
+   cd node-backend
+   npm install
+   cd ../react-frontend
+   npm install
+
+3. **Database Setup**
+- Set up MySQL and create the necessary database and tables based on the provided schema.
+
+4. **Environment Configuration**
+- Configure environment variables for the backend like database connection.
+
+5. **Start Backend Server**
+   ```bash
+   cd node-backend
+   npm start
+
+6. **Start Frontend Development Server**
+   ```bash
+   cd react-frontend
+   npm start
 
 ## Contributors
 
@@ -51,3 +69,21 @@ The `shared-resources` directory includes common utilities, configurations, and 
 3. Istina Suresh
 4. Chamath Sansala
 5. Madhawa Nuwan
+
+
+## How to Contribute to the Project
+
+- Fork the repository.
+- Create a new branch (`git checkout -b feature/yourFeatureName`).
+- Commit your changes (`git commit -am 'Add some yourFeatureName'`).
+- Push to the branch (`git push origin feature/yourFeatureName`).
+- Create a new Pull Request.
+
+## License
+
+This project is for educational purposes only. 
+
+## Acknowledgements
+
+- Mention any libraries, tutorials, or resources used here.
+- Acknowledge contributors or inspiration sources if any.
