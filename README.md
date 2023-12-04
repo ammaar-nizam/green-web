@@ -31,7 +31,7 @@ The project follows a structured organization:
 - **Tests**
   - Unit and integration tests.
 
-## How to setup the project
+## How to Setup the Project
 
 1. **Clone the Repository**
 
