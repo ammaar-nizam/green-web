@@ -1,0 +1,36 @@
+
+.user_booking {
+  max-width: 70%;
+  margin: auto;
+}
+
+label{
+  font-size: 20px;
+ 
+}
+
+label, select, textarea, input {
+  margin-bottom: 10px;
+}
+
+
+#myFile {
+  display: block; /* Make the file input a block element */
+}
+
+
+table {
+  width: 100%; 
+  border-collapse: collapse; 
+  
+}
+
+submit{
+  width: 20%;
+}
+
+th {
+  background-color: #f2f2f2;
+  padding: 8px;
+  text-align: left;
+}
