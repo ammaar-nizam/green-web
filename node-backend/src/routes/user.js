@@ -1,4 +1,4 @@
-const User = require("../models/User");
+const User = require("../models1/User");
 const CryptoJS = require("crypto-js");
 const { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin } = require("../middleware/authorization");
 
