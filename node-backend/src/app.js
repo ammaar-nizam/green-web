@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const dotenv = require("../dotenv");
+const dotenv = require("dotenv");
 
 const adminRoute = require('./routes/admin');
 const beatOfficeRoute = require('./routes/beatOffice');
@@ -24,6 +24,7 @@ dotenv.config();
 
 app.use(cors());
 app.use(express.json());
+
 app.use("/api/admins", adminRoute);
 app.use("/api/beatOffices", beatOfficeRoute);
 app.use("/api/beatOfficers", beatOfficerRoute);
@@ -41,5 +42,5 @@ app.use("/api/wildlifes", wildlifeRoute);
 app.use("/api", commonRoute);
 
 app.listen(process.env.PORT || 5000, () => {
-    console.log("Backend server is running!");
-  });
+  console.log("Backend server is running!");
+});
