@@ -250,7 +250,7 @@ const AllUserReport = () => {
   // if (loading) {
   //   return (
   //     <div class="alert alert-info" role="alert">
-  //       This is a info alert—check it out!
+  //       Loading...Please wait!
   //     </div>
   //   );
   // }
