@@ -7,7 +7,7 @@ const Navbar = () => {
   const userRole = "admin";
 
   return (
-    <nav className="navbar navbar-expand-lg sticky-top navbar-light bg-light px-5">
+    <nav className="navbar navbar-expand-md sticky-top navbar-light bg-light px-5">
       <Link to="/dashboard" className="navbar-brand">
         Green Web
       </Link>

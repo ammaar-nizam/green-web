@@ -5,14 +5,14 @@ import listImage from "../../../assets/list.svg";
 
 const Reports = () => {
   return (
-    <div className="container">
+    <div className="">
       <div className="row">
-        <div className="col-md-4 text-center">
+        <div className="col-md-3 mt-3 text-center">
           <Link to="/reports/all-user-report" className="">
             <div className="card">
-              <div className="d-flex justify-content-center">
+              <div className="d-flex justify-content-center p-3">
                 <img
-                  className="card-img-top w-50 h-50"
+                  className="card-img-top report-image"
                   src={userImage}
                   alt="users"
                 />
@@ -27,12 +27,12 @@ const Reports = () => {
           </Link>
         </div>
 
-        <div className="col-md-4 text-center">
+        <div className="col-md-3 mt-3 text-center">
           <Link to="/reports/all-complaint-report" className="">
             <div className="card">
-              <div className="d-flex justify-content-center">
+              <div className="d-flex justify-content-center p-3">
                 <img
-                  className="card-img-top w-50 h-50"
+                  className="card-img-top report-image"
                   src={listImage}
                   alt="users"
                 />
