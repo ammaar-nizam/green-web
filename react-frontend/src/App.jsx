@@ -5,6 +5,7 @@ import Reports from "./routes/pages/reports/reports"
 import AllUserReport from "./routes/pages/reports/all-user-report"
 import AllComplaintReport from "./routes/pages/reports/all-complaint-report"
 import MyComplaints from "./routes/pages/my-complaints/my-complaints"
+import DashboardPage from "./routes/pages/dashboard/dashboard"
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
    <BrowserRouter>
      <Routes>
      <Route path="/" element={<MainLayout />}>
+      <Route path="dashboard" element={<DashboardPage/>}/>
       <Route path="new-complaint" element={<SubmitComplaintPage/>}/>
       <Route path="my-complaints" element={<MyComplaints/>}/>
       
