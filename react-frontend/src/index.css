@@ -2,3 +2,23 @@
     width: 120px;
     height: 120px;
 }
+
+.notifications {
+    height: 350px;
+    overflow: scroll;
+    overflow: auto;
+}
+
+.custom-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+@media (max-width: 768px) {
+    .notifications {
+        height: 250px;
+    }
+}
