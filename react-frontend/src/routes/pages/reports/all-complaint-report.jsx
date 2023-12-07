@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { CSVLink } from "react-csv";
 import axios from "axios";
 import { complaints } from "../../../data/dummy-data";
+import { InfoMessage } from "../../../components/alert-message";
 
 const AllComplaintReport = () => {
   // const [complaints, setComplaints] = useState(null);
@@ -45,13 +46,11 @@ const AllComplaintReport = () => {
   let allKeys = null;
   if (complaints.length > 0) {
     // all keys except for "Category"
-    allKeys = Array.from(new Set(complaints.flatMap((complaint) => Object.keys(complaint)))).filter(key => key !== "category");
+    allKeys = Array.from(
+      new Set(complaints.flatMap((complaint) => Object.keys(complaint)))
+    ).filter((key) => key !== "category");
   } else {
-    return (
-      <div class="alert alert-info" role="alert">
-        No complaints found!
-      </div>
-    );
+    return <InfoMessage message="No complaints found!" />;
   }
 
   // headers for the CSV
