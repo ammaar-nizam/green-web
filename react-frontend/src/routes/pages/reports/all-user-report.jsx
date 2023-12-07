@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { CSVLink } from "react-csv";
 import axios from "axios";
 import { users } from "../../../data/dummy-data";
+import { InfoMessage } from "../../../components/alert-message";
 
 const AllUserReport = () => {
   // const [users, setUsers] = useState(null);
@@ -46,11 +47,7 @@ const AllUserReport = () => {
   if (users.length > 0) {
     allKeys = Array.from(new Set(users.flatMap((user) => Object.keys(user))));
   } else {
-    return (
-      <div class="alert alert-info" role="alert">
-        No users found!
-      </div>
-    );
+    return <InfoMessage message="No users found!" />;
   }
 
   // headers for the CSV

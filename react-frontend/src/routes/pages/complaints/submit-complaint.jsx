@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
+import { ErrorMessage } from "../../../components/alert-message";
 
 const SubmitComplaintPage = () => {
   const [currentLocation, setCurrentLocation] = useState(null);
+  const [error, setError] = useState("");
   const [formData, setFormData] = useState({
-    institution: '',
-    division: '',
-    branch: '',
-    incident: '',
-    location: '',
+    institution: "",
+    division: "",
+    branch: "",
+    incident: "",
+    location: "",
   });
 
   const handleChange = (e) => {
@@ -21,24 +23,25 @@ const SubmitComplaintPage = () => {
 
     if (formData.institution === '' || formData.institution === 'selection')
     {
-      alert('Please select an institution.');
+      setError("Please select an institution.");
       return;
     }
     
     else if (formData.division === '' || formData.division === 'selection')
     {
-      alert('Please select a division.');
+      setError("Please select a division.");
       return;
     }
     else if (formData.branch === '' || formData.branch == 'selection')
     {
-      alert('Please select branch.');
+      setError("Please select branch.");
       return;
     }
-    else if (formData.location === '')
-    {
-      alert('Please add location of incident.');
+     else if (formData.location === "") {
+      setError("Please add location of incident.");
       return;
+    } else {
+      setError(null);
     }
 
     console.log(formData);
@@ -48,7 +51,8 @@ const SubmitComplaintPage = () => {
       // const response = await axios.post('YOUR_API_ENDPOINT', formData);
       // console.log('Form submitted successfully!', response.data);
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error("Error submitting form:", error);
+      setError("Error submitting form:", error);
     }
   };
 
@@ -67,13 +71,15 @@ const SubmitComplaintPage = () => {
         }
       );
     } else {
-      console.error('Geolocation is not supported by this browser.');
-      
+      console.error("Geolocation is not supported by this browser.");
+      setError("Geolocation is not supported by this browser.");
+      // Handle no geolocation support
     }
   };
 
   return (
     <div className="container">
+      {error && <ErrorMessage message={error} />}
       <form className="user_booking" onSubmit={handleSubmit}>
         <div className="row  pt-3">
           <div className="col-12">
@@ -154,11 +160,8 @@ const SubmitComplaintPage = () => {
         </div>
         <div className="row  pt-3">
           <div className="col-12">
-            <label
-              htmlFor="location"
-              className="submit-complain-label mr-5"
-            >
-              Location :{' '}
+            <label htmlFor="location" className="submit-complain-label mr-5">
+              Location :{" "}
             </label>
             <button
               type="button"
@@ -184,11 +187,7 @@ const SubmitComplaintPage = () => {
         </div>
         <div className="row  pt-3">
           <div className="col-12 text-center">
-            <input
-              type="submit"
-              className="btn btn-success"
-              value="Submit"
-            />
+            <input type="submit" className="btn btn-success" value="Submit" />
           </div>
         </div>
       </form>
