@@ -19,18 +19,18 @@ const SubmitComplaintPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (formData.institution === '')
+    if (formData.institution === '' || formData.institution === 'selection')
     {
       alert('Please select an institution.');
       return;
     }
     
-    else if (formData.division === '')
+    else if (formData.division === '' || formData.division === 'selection')
     {
       alert('Please select a division.');
       return;
     }
-    else if (formData.branch === '')
+    else if (formData.branch === '' || formData.branch == 'selection')
     {
       alert('Please select branch.');
       return;
@@ -63,12 +63,12 @@ const SubmitComplaintPage = () => {
         },
         (error) => {
           console.error(error.message);
-          // Handle error
+          
         }
       );
     } else {
       console.error('Geolocation is not supported by this browser.');
-      // Handle no geolocation support
+      
     }
   };
 
@@ -93,7 +93,7 @@ const SubmitComplaintPage = () => {
               onChange={handleChange}
               required
             >
-              <option value="0">--Select Institution--</option>
+              <option value="selection">--Select Institution--</option>
               <option value="wildlife">Wildlife Conservations</option>
               <option value="forest">Forest Conservations</option>
             </select>
@@ -112,7 +112,7 @@ const SubmitComplaintPage = () => {
               onChange={handleChange}
               required
             >
-              <option value="0">--Select Division--</option>
+              <option value="selection">--Select Division--</option>
               <option value="Gampaha">Gampaha</option>
               <option value="Anuradhapura">Anuradhapura</option>
             </select>
@@ -129,7 +129,7 @@ const SubmitComplaintPage = () => {
               onChange={handleChange}
               required
             >
-              <option value="0">--Select Branch--</option>
+              <option value="selection">--Select Branch--</option>
               <option value="Wattala">Wattala</option>
               <option value="Ja Ela">Ja Ela</option>
             </select>
