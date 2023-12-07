@@ -4,7 +4,7 @@ import PublicLinks from "./nav-links/public-links";
 import AdminLinks from "./nav-links/admin-links";
 
 const Navbar = () => {
-  const userRole = "admin";
+  const userRole = "public";
 
   return (
     <nav className="navbar navbar-expand-md sticky-top navbar-light bg-light px-5">
