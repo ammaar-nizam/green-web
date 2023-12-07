@@ -21,19 +21,27 @@ const SubmitComplaintPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (formData.institution === "") {
+    if (formData.institution === '' || formData.institution === 'selection')
+    {
       setError("Please select an institution.");
       return;
-    } else if (formData.division === "") {
+    }
+    
+    else if (formData.division === '' || formData.division === 'selection')
+    {
       setError("Please select a division.");
       return;
-    } else if (formData.branch === "") {
+    }
+    else if (formData.branch === '' || formData.branch == 'selection')
+    {
       setError("Please select branch.");
       return;
-    } else if (formData.location === "") {
+    }
+     else if (formData.location === "") {
       setError("Please add location of incident.");
       return;
-    } else {
+    } 
+    else {
       setError(null);
     }
 
@@ -60,7 +68,7 @@ const SubmitComplaintPage = () => {
         },
         (error) => {
           console.error(error.message);
-          // Handle error
+          
         }
       );
     } else {
@@ -92,7 +100,7 @@ const SubmitComplaintPage = () => {
               onChange={handleChange}
               required
             >
-              <option value="0">--Select Institution--</option>
+              <option value="selection">--Select Institution--</option>
               <option value="wildlife">Wildlife Conservations</option>
               <option value="forest">Forest Conservations</option>
             </select>
@@ -111,7 +119,7 @@ const SubmitComplaintPage = () => {
               onChange={handleChange}
               required
             >
-              <option value="0">--Select Division--</option>
+              <option value="selection">--Select Division--</option>
               <option value="Gampaha">Gampaha</option>
               <option value="Anuradhapura">Anuradhapura</option>
             </select>
@@ -128,7 +136,7 @@ const SubmitComplaintPage = () => {
               onChange={handleChange}
               required
             >
-              <option value="0">--Select Branch--</option>
+              <option value="selection">--Select Branch--</option>
               <option value="Wattala">Wattala</option>
               <option value="Ja Ela">Ja Ela</option>
             </select>
