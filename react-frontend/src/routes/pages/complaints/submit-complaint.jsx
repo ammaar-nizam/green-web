@@ -40,7 +40,8 @@ const SubmitComplaintPage = () => {
      else if (formData.location === "") {
       setError("Please add location of incident.");
       return;
-    } else {
+    } 
+    else {
       setError(null);
     }
 
