@@ -3,6 +3,12 @@
     height: 120px;
 }
 
+
+.submit-complain-label{
+  
+    font-size: 15px;
+    font-weight: bold;
+  }
 .notifications {
     height: 350px;
     overflow: scroll;
