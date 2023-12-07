@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
+const bodyParser = require('body-parser');
 
 const adminRoute = require('./routes/admin');
 const beatOfficeRoute = require('./routes/beatOffice');
@@ -24,6 +25,7 @@ dotenv.config();
 
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.json());
 
 app.use("/api/admins", adminRoute);
 app.use("/api/beatOffices", beatOfficeRoute);
