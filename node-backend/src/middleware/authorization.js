@@ -4,10 +4,10 @@ const verifyToken = (req, res, next) => {
     const authHeader = req.headers.token;
     if(authHeader){
         const token = authHeader.split(" ")[1];
-        jwt.verify(token, process.env.JWT_SECRET_KEY, (error, customer) => {
+        jwt.verify(token, process.env.JWT_SECRET_KEY, (error, user) => {
             if(error)
                 res.status(403).json("Token is not valid");
-            req.customer = customer;
+            req.user = user;
             next();
         });
     }
@@ -18,7 +18,7 @@ const verifyToken = (req, res, next) => {
 
 const verifyTokenAndAuthorization = (req, res, next) => {
     verifyToken(req, res, () => {
-        if(req.customer.id === req.params.id || req.customer.isAdmin){
+        if(req.user.id === req.params.id || req.user.isAdmin){
             next();
         }
         else{
@@ -29,7 +29,7 @@ const verifyTokenAndAuthorization = (req, res, next) => {
 
 const verifyTokenAndAdmin = (req, res, next) => {
     verifyToken(req, res, () => {
-      if (req.customer.isAdmin) {
+      if (req.user.isAdmin) {
         next();
       } else {
         res.status(403).json("You do not have admin privileges. Please login as an admin.");
