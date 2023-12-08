@@ -1,9 +1,10 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "green-web",
-    "host": "127.0.0.1",
+    "username": "sql12668639",
+    "password": "iB79j43YlM",
+    "database": "sql12668639",
+    "host": "sql12.freesqldatabase.com",
+    "port": 3306,
     "dialect": "mysql"
   },
   "test": {
