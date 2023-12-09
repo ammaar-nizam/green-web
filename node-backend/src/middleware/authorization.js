@@ -6,13 +6,17 @@ const verifyToken = (req, res, next) => {
         const token = authHeader.split(" ")[1];
         jwt.verify(token, process.env.JWT_SECRET_KEY, (error, user) => {
             if(error)
-                res.status(403).json("Token is not valid");
+                res.status(403).json({
+                    message: "Token is not valid"
+                });
             req.user = user;
             next();
         });
     }
     else{
-        return res.status(401).json("You are not authenticated.")
+        return res.status(401).json({
+            message: "You are not authenticated."
+        })
     }
 };
 
@@ -22,7 +26,7 @@ const verifyTokenAndAuthorization = (req, res, next) => {
             next();
         }
         else{
-            res.status(403).json("You are not the authorized user.");
+            res.status(403).json({message: "You are not the authorized user."});
         }
     });
 };
@@ -32,7 +36,7 @@ const verifyTokenAndAdmin = (req, res, next) => {
       if (req.user.isAdmin) {
         next();
       } else {
-        res.status(403).json("You do not have admin privileges. Please login as an admin.");
+        res.status(403).json({message: "You do not have admin privileges. Please login as an admin."});
       }
     });
   };

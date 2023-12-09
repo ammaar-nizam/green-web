@@ -6,7 +6,7 @@ const Validator = require('fastest-validator');
 // Define a schema to validate the user input
 const schema = {    
     name: {type: "string", optional: false, max: "100", pattern: /^[A-Za-z\s]+$/, message: {
-        optional: "NIC cannot be empty",
+        optional: "Name cannot be empty",
         max: "Name cannot exceed 100 characters.",
         pattern: "Name must not have digits or special characters."
     }},
@@ -15,17 +15,20 @@ const schema = {
         pattern: "NIC must be either 9 digits followed by a V or 12 digits."
     } },
     username: {type: "string", optional: false, max: "20", pattern: /^[^\d\s]+$/, message: {
-        optional: "NIC cannot be empty",
+        optional: "Username cannot be empty",
         max: "Username cannot exceed 20 characters.",
         pattern: "Username must not have spaces, digits or special characters."
     }},
     email: {type: "string", optional: false, pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: {
-        optional: "NIC cannot be empty",
+        optional: "Email cannot be empty",
         pattern: "Email format is not valid."
     } },
     mobile: { type: "string", optional: false, pattern: /^\d{9,10}$/, message: {
-        optional: "NIC cannot be empty",
+        optional: "Mobile cannot be empty",
         pattern: "Mobile must have 9 or 10 digits."
+    } },
+    password: { type: "string", optional: false, message: {
+        optional: "Password cannot be empty"
     } }
 }
 
