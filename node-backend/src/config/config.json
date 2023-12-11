@@ -1,22 +1,22 @@
 {
   "development": {
-    "username": "root",
-    "password": "StrongPassword@123",
-    "database": "greenweb",
-    "host": "127.0.0.1",
+    "uri": "mysql://6zu5lrny3rajd9n1myeu:pscale_pw_mBlfR8Tld2xcucIZp9XCH0wcoRhpfhvG1sKGBD73fJY@aws.connect.psdb.cloud/greenweb?sslaccept=strict",
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "6zu5lrny3rajd9n1myeu",
+    "password": "pscale_pw_mBlfR8Tld2xcucIZp9XCH0wcoRhpfhvG1sKGBD73fJY",
+    "database": "greenweb",
+    "host": "aws.connect.psdb.cloud",
+    "dialect": "mysql",
+    "dialectOptions":{
+      "ssl": false
+    }
   },
   "production": {
     "username": "root",
-    "password": null,
-    "database": "database_production",
+    "password": "StrongPassword@123",
+    "database": "greenweb",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }
