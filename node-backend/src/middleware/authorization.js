@@ -33,7 +33,7 @@ const verifyTokenAndAuthorization = (req, res, next) => {
 
 const verifyTokenAndAdmin = (req, res, next) => {
     verifyToken(req, res, () => {
-      if (req.user.isAdmin) {
+      if (req.user.roleId === 2) {
         next();
       } else {
         res.status(403).json({message: "You do not have admin privileges. Please login as an admin."});
@@ -41,4 +41,14 @@ const verifyTokenAndAdmin = (req, res, next) => {
     });
   };
 
-module.exports = { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin };
+const verifyTokenAndSuperAdmin = (req, res, next) => {
+verifyToken(req, res, () => {
+    if (req.user.roleId === 4) {
+    next();
+    } else {
+    res.status(403).json({message: "You do not have super admin privileges. Please login as a super admin."});
+    }
+});
+};
+
+module.exports = { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin, verifyTokenAndSuperAdmin };

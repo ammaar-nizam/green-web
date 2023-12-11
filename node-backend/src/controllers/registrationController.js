@@ -1,38 +1,7 @@
 const models = require('../models');
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
-const Validator = require('fastest-validator');
-
-// Define a schema to validate the user input
-const schema = {    
-    name: {type: "string", optional: false, max: "100", pattern: /^[A-Za-z\s]+$/, message: {
-        optional: "Name cannot be empty",
-        max: "Name cannot exceed 100 characters.",
-        pattern: "Name must not have digits or special characters."
-    }},
-    nic: {type: "string", optional: false, pattern: /^(?:\d{12}|\d{9}[Vv])$/, message: {
-        optional: "NIC cannot be empty",
-        pattern: "NIC must be either 9 digits followed by a V or 12 digits."
-    } },
-    username: {type: "string", optional: false, max: "20", pattern: /^[^\d\s]+$/, message: {
-        optional: "Username cannot be empty",
-        max: "Username cannot exceed 20 characters.",
-        pattern: "Username must not have spaces, digits or special characters."
-    }},
-    email: {type: "string", optional: false, pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: {
-        optional: "Email cannot be empty",
-        pattern: "Email format is not valid."
-    } },
-    mobile: { type: "string", optional: false, pattern: /^\d{9,10}$/, message: {
-        optional: "Mobile cannot be empty",
-        pattern: "Mobile must have 9 or 10 digits."
-    } },
-    password: { type: "string", optional: false, message: {
-        optional: "Password cannot be empty"
-    } }
-}
-
-const validator = new Validator();
+const {validator, schemaForPublicUser} = require('../utils/validation');
 
 // Registering as a public user
 function registerAsPublicUser(req, res){
@@ -49,7 +18,7 @@ function registerAsPublicUser(req, res){
         roleId: 1
     }
     // Validate user input
-    const validationResponse = validator.validate(publicUser, schema);
+    const validationResponse = validator.validate(publicUser, schemaForPublicUser);
     if(validationResponse !== true){
         res.status(400).json({
             message: "Validation failed.",
@@ -106,6 +75,7 @@ function loginAsPublicUser(req, res){
                     email: publicUser.email
                 },
                 process.env.JWT_SECRET_KEY,
+                { expiresIn: '1m' },
                 function(err, accessToken){
                     res.status(200).json({
                         message: "Authentication successful and logged in as a public user.",

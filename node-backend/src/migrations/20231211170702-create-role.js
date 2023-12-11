@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      roleName: {
+      role: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -21,6 +21,7 @@ module.exports = {
         type: Sequelize.DATE
       }
     });
+  
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Roles');

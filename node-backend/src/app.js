@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
 const bodyParser = require('body-parser');
+const CryptoJS = require("crypto-js");
 
 const adminRoute = require('./routes/admin');
 const beatOfficeRoute = require('./routes/beatOffice');
