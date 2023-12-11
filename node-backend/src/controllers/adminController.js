@@ -23,10 +23,10 @@ function create(req, res){
             errors: validationResponse
         });
     }else{
-        models.Admin.findOne({where: {username:req.body.username}}).then((data) => {
+        models.Admin.findOne({where: {username:req.body.username} && {email: req.body.email} }).then((data) => {
             if(data){
                 res.status(409).json({
-                    message: "A user already exists with the same username."
+                    message: "A user already exists with the same username or email."
                 });
             } else{
                 models.Admin.create(admin).then((data) => {

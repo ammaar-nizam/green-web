@@ -72,7 +72,8 @@ function loginAsPublicUser(req, res){
               const accessToken = jwt.sign(
                 {
                     id: publicUser.id,
-                    email: publicUser.email
+                    email: publicUser.email,
+                    roleId: admin.roleId
                 },
                 process.env.JWT_SECRET_KEY,
                 { expiresIn: '1m' },

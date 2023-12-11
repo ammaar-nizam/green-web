@@ -3,7 +3,7 @@ const beatOfficerController = require('../controllers/beatOfficerController');
 const authorization = require('../middleware/authorization');
 
 router.post("/", authorization.verifyTokenAndAdmin, beatOfficerController.create);
-// router.post("/login", registrationController.loginAsPublicUser);
+router.post("/login", beatOfficerController.login);
 router.get("/:id", authorization.verifyTokenAndAdmin, beatOfficerController.getBeatOfficerById);
 router.get("/", authorization.verifyTokenAndAdmin, beatOfficerController.getAllBeatOfficers);
 router.patch("/:id", authorization.verifyTokenAndAdmin, beatOfficerController.updateBeatOfficerById);

@@ -32,23 +32,32 @@ const verifyTokenAndAuthorization = (req, res, next) => {
 };
 
 const verifyTokenAndAdmin = (req, res, next) => {
-    verifyToken(req, res, () => {
-      if (req.user.roleId === 2) {
-        next();
-      } else {
-        res.status(403).json({message: "You do not have admin privileges. Please login as an admin."});
-      }
-    });
+    try{
+        verifyToken(req, res, () => {
+            if (req.user.roleId === 2) {
+              next();
+            } else {
+              res.status(403).json({message: "You do not have admin privileges. Please login as an admin."});
+            }
+          });
+    }catch(err){
+        console.log("Your token is not valid or expired.");
+    }
   };
 
 const verifyTokenAndSuperAdmin = (req, res, next) => {
-verifyToken(req, res, () => {
-    if (req.user.roleId === 4) {
-    next();
-    } else {
-    res.status(403).json({message: "You do not have super admin privileges. Please login as a super admin."});
+    try{
+        verifyToken(req, res, () => {
+            if (req.user.id === 2 && req.user.roleId === 2) {
+                next();
+            } else {
+                res.status(403).json({message: "You do not have super admin privileges. Please login as a super admin."});
+            }
+        });
+    }catch(err){
+        console.log("Your token is expired.");
     }
-});
+    
 };
 
 module.exports = { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin, verifyTokenAndSuperAdmin };

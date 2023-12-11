@@ -1,5 +1,6 @@
 const models = require('../models');
 const CryptoJS = require("crypto-js");
+const jwt = require("jsonwebtoken");
 const {validator, schemaForBeatOfficerAndAdmin} = require('../utils/validation');
 
 // Create beat officer
@@ -23,10 +24,10 @@ function create(req, res){
             errors: validationResponse
         });
     }else{
-        models.BeatOfficer.findOne({where: {username:req.body.username}}).then((data) => {
+        models.BeatOfficer.findOne({where: {username:req.body.username} && {email: req.body.email} }).then((data) => {
             if(data){
                 res.status(409).json({
-                    message: "A user already exists with the same username."
+                    message: "A user already exists with the same username or email."
                 });
             } else{
                 models.BeatOfficer.create(beatOfficer).then((data) => {
@@ -174,5 +175,5 @@ function deleteBeatOfficerById(req, res){
 }
 
 module.exports = {
-    create, getBeatOfficerById, getAllBeatOfficers, updateBeatOfficerById, deleteBeatOfficerById
+    create, login, getBeatOfficerById, getAllBeatOfficers, updateBeatOfficerById, deleteBeatOfficerById
 }
