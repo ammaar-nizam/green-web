@@ -1,10 +1,29 @@
 const models = require('../models');
 const CryptoJS = require("crypto-js");
+const { Op } = require("sequelize");
 
 // Get public user by Id
 function getPublicUserById(req, res){
     const id = req.params.id;
     models.PublicUser.findByPk(id).then((data) => {
+        if(data){
+            res.status(200).json(data);
+        }else{
+            res.status(404).json({
+                message: "Public user not found"
+            });
+        }
+    }).catch((err) => {
+        res.status(500).json({
+            message: "Error retrieving the public user."
+        });
+    });
+}
+
+// Get public user by name
+function getPublicUserByName(req, res){
+    const {name} = req.query;
+    models.PublicUser.findAll({where: {name: {[Op.like]: `%${name}%`}}}).then((data) => {
         if(data){
             res.status(200).json(data);
         }else{
@@ -83,5 +102,5 @@ function deletePublicUserById(req, res){
 }
 
 module.exports = {
-    getPublicUserById, getAllPublicUsers, updatePublicUserById, deletePublicUserById
+    getPublicUserById, getPublicUserByName, getAllPublicUsers, updatePublicUserById, deletePublicUserById
 }

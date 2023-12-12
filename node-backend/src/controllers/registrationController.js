@@ -76,7 +76,7 @@ function loginAsPublicUser(req, res){
                     roleId: admin.roleId
                 },
                 process.env.JWT_SECRET_KEY,
-                { expiresIn: '1m' },
+                { expiresIn: '30m' },
                 function(err, accessToken){
                     res.status(200).json({
                         message: "Authentication successful and logged in as a public user.",
