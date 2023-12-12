@@ -50,8 +50,17 @@ const schemaForBeatOfficerAndAdmin = {
     } }
 }
 
+// Define a schema to validate the user input (beat officer and admin)
+const schemaForInstitution = {    
+    name: {type: "string", optional: false, max: "100", pattern: /^[A-Za-z\s]+$/, message: {
+        optional: "Institution Name cannot be empty",
+        max: "Institution Name cannot exceed 100 characters.",
+        pattern: "Institution Name must not have digits or special characters."
+    }}
+}
+
 const validator = new Validator();
 
 module.exports = {
-    validator, schemaForPublicUser, schemaForBeatOfficerAndAdmin
+    validator, schemaForPublicUser, schemaForBeatOfficerAndAdmin, schemaForInstitution
 }

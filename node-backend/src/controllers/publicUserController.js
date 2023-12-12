@@ -22,8 +22,8 @@ function getPublicUserById(req, res){
 
 // Get public user by name
 function getPublicUserByName(req, res){
-    const {name} = req.query;
-    models.PublicUser.findAll({where: {name: {[Op.like]: `%${name}%`}}}).then((data) => {
+    const nameToFind = req.params.name;
+    models.PublicUser.findOne({where: {name:req.params.name}}).then((data) => {
         if(data){
             res.status(200).json(data);
         }else{
