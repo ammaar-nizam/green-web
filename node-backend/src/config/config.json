@@ -7,17 +7,14 @@
     "dialect": "mysql"
   },
   "test": {
-    "username": "6zu5lrny3rajd9n1myeu",
-    "password": "pscale_pw_mBlfR8Tld2xcucIZp9XCH0wcoRhpfhvG1sKGBD73fJY",
+    "username": "root",
+    "password": "StrongPassword@123",
     "database": "greenweb",
-    "host": "aws.connect.psdb.cloud",
-    "dialect": "mysql",
-    "dialectOptions":{
-      "ssl": false
-    }
+    "host": "127.0.0.1",
+    "dialect": "mysql"
   },
   "production": {
-    "uri": "mysql://6zu5lrny3rajd9n1myeu:pscale_pw_mBlfR8Tld2xcucIZp9XCH0wcoRhpfhvG1sKGBD73fJY@aws.connect.psdb.cloud/greenweb?sslaccept=strict",
+    "use_env_variable": "DATABASE_URI",
     "dialect": "mysql"
   }
 }
