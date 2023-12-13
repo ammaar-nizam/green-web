@@ -1,9 +1,9 @@
+const registrationController = require('../controllers/registrationController')
+
 const router = require("express").Router();
-const User = require("../models/User");
-const CryptoJS = require("crypto-js");
-const jwt = require("jsonwebtoken");
 
-
+router.post("/register", registrationController.registerAsPublicUser);
+router.post("/login", registrationController.loginAsPublicUser);
 
 module.exports = router;
 
