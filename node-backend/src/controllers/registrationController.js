@@ -54,10 +54,10 @@ function registerAsPublicUser(req, res){
 
 // Logging in as a public user
 function loginAsPublicUser(req, res){
-    models.PublicUser.findOne({where: {username: req.body.username}}).then((publicUser) => {
+    models.PublicUser.findOne({where: {username: req.body.username, email:req.body.email}}).then((publicUser) => {
         if(publicUser === null){
             res.status(401).json({
-                message: "No such user exists."
+                message: "Either incorrect username or email."
             });
         }else{
             const hashedPassword = CryptoJS.AES.decrypt(
@@ -73,7 +73,7 @@ function loginAsPublicUser(req, res){
                 {
                     id: publicUser.id,
                     email: publicUser.email,
-                    roleId: admin.roleId
+                    roleId: publicUser.roleId
                 },
                 process.env.JWT_SECRET_KEY,
                 { expiresIn: '30m' },
@@ -85,6 +85,7 @@ function loginAsPublicUser(req, res){
                 }
               );
         }
+        
     }).catch((err) => {
         res.status(500).json({
             message: "Error logging in as public user.",

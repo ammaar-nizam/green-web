@@ -52,10 +52,10 @@ function create(req, res){
 
 // Logging in as an admin
 function login(req, res){
-    models.Admin.findOne({where: {username: req.body.username}}).then((admin) => {
+    models.Admin.findOne({where: {username: req.body.username, email:req.body.email}}).then((admin) => {
         if(admin === null){
             res.status(401).json({
-                message: "No such user exists."
+                message: "Either incorrect username or email."
             });
         }else{
             const hashedPassword = CryptoJS.AES.decrypt(

@@ -3,7 +3,7 @@ const app = express();
 const dotenv = require("dotenv");
 const bodyParser = require('body-parser');
 
-const twilio = require('twilio');
+// const twilio = require('twilio');
 
 const adminRoute = require('./routes/admin');
 const beatOfficeRoute = require('./routes/beatOffice');
@@ -40,7 +40,7 @@ app.use(bodyParser.json());
 app.use("/api/admins", adminRoute);
 app.use("/api/beat-offices", beatOfficeRoute);
 app.use("/api/beat-officers", beatOfficerRoute);
-app.use("/api/branchs", branchRoute);
+app.use("/api/branches", branchRoute);
 app.use("/api/complaints", complaintRoute);
 app.use("/api/divisions", divisionRoute);
 app.use("/api/institutions", institutionRoute);
