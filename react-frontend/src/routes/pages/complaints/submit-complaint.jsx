@@ -9,6 +9,7 @@ const SubmitComplaintPage = () => {
     institution: "",
     division: "",
     branch: "",
+    office:"",
     incident: "",
     location: "",
   });
@@ -35,6 +36,11 @@ const SubmitComplaintPage = () => {
     else if (formData.branch === '' || formData.branch == 'selection')
     {
       setError("Please select branch.");
+      return;
+    }
+    else if (formData.office === '' || formData.office == 'selection')
+    {
+      setError("Please select a beat office office.");
       return;
     }
      else if (formData.location === "") {
@@ -88,7 +94,7 @@ const SubmitComplaintPage = () => {
           </div>
         </div>
         <div className="row  pt-3">
-          <div className="col-12">
+          <div className="col-6">
             <label htmlFor="institution" className="submit-complain-label">
               Institution :
             </label>
@@ -105,8 +111,6 @@ const SubmitComplaintPage = () => {
               <option value="forest">Forest Conservations</option>
             </select>
           </div>
-        </div>
-        <div className="row  pt-3">
           <div className="col-md-6">
             <label htmlFor="division" className="submit-complain-label">
               Division :
@@ -124,8 +128,10 @@ const SubmitComplaintPage = () => {
               <option value="Anuradhapura">Anuradhapura</option>
             </select>
           </div>
+        </div>
+        <div className="row  pt-3">
           <div className="col-md-6">
-            <label htmlFor="branch" className="submit-complain-label">
+          <label htmlFor="branch" className="submit-complain-label">
               Branch :
             </label>
             <select
@@ -139,6 +145,23 @@ const SubmitComplaintPage = () => {
               <option value="selection">--Select Branch--</option>
               <option value="Wattala">Wattala</option>
               <option value="Ja Ela">Ja Ela</option>
+            </select>
+          </div>
+          <div className="col-md-6">
+            <label htmlFor="office" className="submit-complain-label">
+              Beat Office :
+            </label>
+            <select
+              className="form-control"
+              name="office"
+              id="office"
+              value={formData.office}
+              onChange={handleChange}
+              required
+            >
+              <option value="selection">--Select Beat Office--</option>
+              <option value="Wattala">Yala Wildlife BO</option>
+              <option value="Ja Ela">Monaragala Forest BO</option>
             </select>
           </div>
         </div>
