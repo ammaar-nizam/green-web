@@ -105,7 +105,8 @@ function getAdminById(req, res){
         }
     }).catch((err) => {
         res.status(500).json({
-            message: "Error retrieving the admin."
+            message: "Error retrieving the admin.",
+            error: err
         });
     });
 }
@@ -116,7 +117,8 @@ function getAllAdmins(req, res){
         res.status(200).json(data);
     }).catch((err) => {
         res.status(500).json({
-            message: "Error retrieving all admins."
+            message: "Error retrieving all admins.",
+            error: err
         });
     });
 }
@@ -148,7 +150,8 @@ function updateAdminById(req, res){
         }
     }).catch((err) => {
         res.status(500).json({
-            message: "Error updating the admin."
+            message: "Error updating the admin.",
+            error: err
         });
     });
 }
@@ -168,7 +171,8 @@ function deleteAdminById(req, res){
         }      
     }).catch((err) => {
         res.status(500).json({
-            message: "Error deleting the admin."
+            message: "Error deleting the admin.",
+            error: err
         });
     });
 }

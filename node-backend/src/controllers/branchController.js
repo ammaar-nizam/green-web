@@ -54,7 +54,8 @@ function getBranchById(req, res){
         }
     }).catch((err) => {
         res.status(500).json({
-            message: "Error retrieving the branch."
+            message: "Error retrieving the branch.",
+            error: err
         });
     });
 }
@@ -65,18 +66,29 @@ function getAllBranches(req, res){
         res.status(200).json(data);
     }).catch((err) => {
         res.status(500).json({
-            message: "Error retrieving all branches."
+            message: "Error retrieving all branches.",
+            error: err
         });
     });
 }
 
 //Get branches that belong to a given division
 function getAllBranchesByDivisionId(req, res){
-    models.Branch.findAll().then((data) => {
-        res.status(200).json(data);
+    console.log("hi");
+    models.BeatOffice.findAll({
+        attributes: [
+            [models.Sequelize.literal('DISTINCT branches')]
+        ]
+    }).then((division) => {
+        if(division){
+            const branches = division.BeatOffices.map(beatOffice => beatOffice.Branch);
+            res.status(200).json(branches);
+        }
     }).catch((err) => {
         res.status(500).json({
-            message: "Error retrieving all branches that belong to the division."
+            message: "Error retrieving all branches that belong to the division.",
+            error: err
+            
         });
     });
 }

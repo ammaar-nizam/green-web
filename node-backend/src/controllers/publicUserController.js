@@ -15,7 +15,8 @@ function getPublicUserById(req, res){
         }
     }).catch((err) => {
         res.status(500).json({
-            message: "Error retrieving the public user."
+            message: "Error retrieving the public user.",
+            error: err
         });
     });
 }
@@ -33,7 +34,8 @@ function getPublicUserByName(req, res){
         }
     }).catch((err) => {
         res.status(500).json({
-            message: "Error retrieving the public user."
+            message: "Error retrieving the public user.",
+            error: err
         });
     });
 }
@@ -44,7 +46,8 @@ function getAllPublicUsers(req, res){
         res.status(200).json(data);
     }).catch((err) => {
         res.status(500).json({
-            message: "Error retrieving all public users."
+            message: "Error retrieving all public users.",
+            error: err
         });
     });
 }
@@ -76,7 +79,8 @@ function updatePublicUserById(req, res){
         }
     }).catch((err) => {
         res.status(500).json({
-            message: "Error updating the public user."
+            message: "Error updating the public user.",
+            error: err
         });
     });
 }
@@ -96,7 +100,8 @@ function deletePublicUserById(req, res){
         }      
     }).catch((err) => {
         res.status(500).json({
-            message: "Error deleting the public user."
+            message: "Error deleting the public user.",
+            error: err
         });
     });
 }

@@ -1,10 +1,16 @@
 {
   "development": {
-    "username": "root",
+    "username": "GreenWeb",
     "password": "StrongPassword@123",
     "database": "greenweb",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "host": "mysqlserver-greenweb.mysql.database.azure.com",
+    "dialect": "mysql",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   },
   "test": {
     "username": "root",

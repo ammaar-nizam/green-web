@@ -54,18 +54,20 @@ function getInstitutionById(req, res){
         }
     }).catch((err) => {
         res.status(500).json({
-            message: "Error retrieving the institution."
+            message: "Error retrieving the institution.",
+            error: err
         });
     });
 }
 
 // Get all institutions
 function getAllInstitutions(req, res){
-    models.Institution.findAll().then((data) => {
+    models.Institution.findAll({}).then((data) => {
         res.status(200).json(data);
     }).catch((err) => {
         res.status(500).json({
-            message: "Error retrieving all institutions."
+            message: "Error retrieving all institutions.",
+            error: err
         });
     });
 }

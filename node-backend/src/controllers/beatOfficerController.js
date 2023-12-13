@@ -106,7 +106,8 @@ function getBeatOfficerById(req, res){
         }
     }).catch((err) => {
         res.status(500).json({
-            message: "Error retrieving the beat officer."
+            message: "Error retrieving the beat officer.",
+            error: err
         });
     });
 }
@@ -117,7 +118,8 @@ function getAllBeatOfficers(req, res){
         res.status(200).json(data);
     }).catch((err) => {
         res.status(500).json({
-            message: "Error retrieving all beat officers."
+            message: "Error retrieving all beat officers.",
+            error: err
         });
     });
 }
@@ -149,7 +151,8 @@ function updateBeatOfficerById(req, res){
         }
     }).catch((err) => {
         res.status(500).json({
-            message: "Error updating the beat officer."
+            message: "Error updating the beat officer.",
+            error: err
         });
     });
 }
@@ -169,7 +172,8 @@ function deleteBeatOfficerById(req, res){
         }      
     }).catch((err) => {
         res.status(500).json({
-            message: "Error deleting the beat officer."
+            message: "Error deleting the beat officer.",
+            error: err
         });
     });
 }

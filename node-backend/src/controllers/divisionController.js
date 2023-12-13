@@ -54,7 +54,8 @@ function getDivisionById(req, res){
         }
     }).catch((err) => {
         res.status(500).json({
-            message: "Error retrieving the division."
+            message: "Error retrieving the division.",
+            error: err
         });
     });
 }
@@ -65,18 +66,36 @@ function getAllDivisions(req, res){
         res.status(200).json(data);
     }).catch((err) => {
         res.status(500).json({
-            message: "Error retrieving all divisions."
+            message: "Error retrieving all divisions.",
+            error: err
         });
     });
 }
 
 //Get divisions that belong to a given institution (i.e., Wildlife or Forestry and Environmental)
 function getAllDivisionsByInstitutionId(req, res){
-    models.Division.findAll().then((data) => {
+    console.log("hi");
+    models.BeatOffice.findAll({
+        attributes: ['name'],
+        distinct: true,
+        include: [
+            {
+                model: models.Division,
+                attributes: [],
+            },
+            {
+                model: models.Institution,
+                attributes: [],
+                where: { id: req.params.id }
+            }
+        ]
+    }).then((data) => {
         res.status(200).json(data);
     }).catch((err) => {
         res.status(500).json({
-            message: "Error retrieving all divisions that belong to the institution."
+            message: "Error retrieving all divisions that belong to the institution.",
+            error: err
+            
         });
     });
 }
