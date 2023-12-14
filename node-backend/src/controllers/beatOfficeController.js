@@ -75,16 +75,38 @@ function getAllBeatOffices(req, res){
     });
 }
 
-//Get beat offices that belong to a given branch
-function getAllBeatOfficesByBranchId(req, res){
-    models.BeatOffice.findAll().then((data) => {
-        res.status(200).json(data);
-    }).catch((err) => {
-        res.status(500).json({
-            message: "Error retrieving all beat offices that belong to the branch.",
+// Sequelize raw query to get beat offices that belong to a given branch
+async function getAllBeatOfficesByBranchIdRawQuery(branchId){
+    try{
+        const query = `
+        SELECT DISTINCT bo.name 
+        FROM beatoffices bo
+        LEFT JOIN branches b ON bo.branchId = b.id
+        LEFT JOIN divisions d ON bo.divisionId = d.id
+        LEFT JOIN institutions i ON bo.institutionId = i.id
+        WHERE b.id = :id;
+      `;
+      const beatOffices = sequelize.query(query, {
+          type: QueryTypes.SELECT,
+          replacements: { branchId },
+        });
+      return beatOffices;
+    }catch(err){
+        throw new Error(`Error executing query: ${err}`);
+    }
+}
+
+// Using the above raw query method
+async function getAllBeatOfficesByBranchId(req, res){
+    try {
+        const beatOfficesName = await getAllBeatOfficesByBranchIdRawQuery(req.params.id);
+        res.status(200).json({ beatOfficesName });
+      } catch (err) {
+        res.status(500).json({ 
+            message: "Error retrieving all beat offices for the given branch.",
             error: err
         });
-    });
+      }
 }
 
 module.exports = {create, getBeatOfficeById, getAllBeatOffices, getAllBeatOfficesByBranchId}

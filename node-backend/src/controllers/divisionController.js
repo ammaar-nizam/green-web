@@ -72,32 +72,37 @@ function getAllDivisions(req, res){
     });
 }
 
-//Get divisions that belong to a given institution (i.e., Wildlife or Forestry and Environmental)
-function getAllDivisionsByInstitutionId(req, res){
-    console.log("hi");
-    models.BeatOffice.findAll({
-        attributes: ['name'],
-        distinct: true,
-        include: [
-            {
-                model: models.Division,
-                attributes: [],
-            },
-            {
-                model: models.Institution,
-                attributes: [],
-                where: { id: req.params.id }
-            }
-        ]
-    }).then((data) => {
-        res.status(200).json(data);
-    }).catch((err) => {
-        res.status(500).json({
-            message: "Error retrieving all divisions that belong to the institution.",
-            error: err
-            
+// Sequelize raw query to get divisions that belong to a given institution (i.e., Wildlife or Forestry and Environmental)
+async function getAllDivisionsByInstitutionIdRawQuery(institutionId){
+    try{
+        const query = `
+        SELECT DISTINCT d.name 
+        FROM beatoffices bo
+        LEFT JOIN divisions d ON bo.divisionId = d.id
+        LEFT JOIN institutions i ON bo.institutionId = i.id
+        WHERE i.id = :id;
+      `;
+      const divisions = sequelize.query(query, {
+          type: QueryTypes.SELECT,
+          replacements: { institutionId },
         });
-    });
+      return divisions;
+    }catch(err){
+        throw new Error(`Error executing query: ${err}`);
+    }
+}
+
+// Using the above raw query method
+async function getAllDivisionsByInstitutionId(req, res){
+    try {
+        const divisionNames = await getAllDivisionsByInstitutionIdRawQuery(req.params.id);
+        res.status(200).json({ divisionNames });
+      } catch (err) {
+        res.status(500).json({ 
+            message: "Error retrieving all divisions for the given institution.",
+            error: err 
+        });
+      }
 }
 
 module.exports = {create, getDivisionById, getAllDivisions, getAllDivisionsByInstitutionId}

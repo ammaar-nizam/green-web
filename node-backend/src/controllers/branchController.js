@@ -72,25 +72,31 @@ function getAllBranches(req, res){
     });
 }
 
-//Get branches that belong to a given division
+// Sequelize raw query to get divisions that belong to a given institution (i.e., Wildlife or Forestry and Environmental)
 function getAllBranchesByDivisionId(req, res){
-    console.log("hi");
-    models.BeatOffice.findAll({
-        attributes: [
-            [models.Sequelize.literal('DISTINCT branches')]
-        ]
-    }).then((division) => {
-        if(division){
-            const branches = division.BeatOffices.map(beatOffice => beatOffice.Branch);
-            res.status(200).json(branches);
-        }
-    }).catch((err) => {
+    console.log("1");
+    const query = `
+    SELECT DISTINCT b.name 
+    FROM beatoffices bo
+    LEFT JOIN branches b ON bo.branchId = b.id
+    LEFT JOIN divisions d ON bo.divisionId = d.id
+    LEFT JOIN institutions i ON bo.institutionId = i.id
+    WHERE d.id = :id;
+    `;
+    console.log("Hoooo");
+    const divisionId = req.params.id;
+    sequelize.query(query, {
+        type: QueryTypes.SELECT,
+        replacements: { divisionId },
+    }).then(data => {
+        res.status(200).json(data);
+    }).catch(err => {
         res.status(500).json({
-            message: "Error retrieving all branches that belong to the division.",
+            message: "Error retrieving all branches for the given division.",
             error: err
-            
         });
     });
+    console.log("2");
 }
 
 module.exports = {create, getBranchById, getAllBranches, getAllBranchesByDivisionId}

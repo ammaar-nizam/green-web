@@ -52,6 +52,7 @@ function create(req, res){
 
 // Logging in as an admin
 function login(req, res){
+    
     models.Admin.findOne({where: {username: req.body.username, email:req.body.email}}).then((admin) => {
         if(admin === null){
             res.status(401).json({

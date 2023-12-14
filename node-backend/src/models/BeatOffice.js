@@ -1,5 +1,4 @@
 'use strict';
-
 const {
   Model
 } = require('sequelize');
@@ -11,13 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // Model.Institution.hasMany(Model.BeatOffice, { foreignKey: 'institutionId' });
-      // Model.Branch.hasMany(Model.BeatOffice, { foreignKey: 'branchId' });
-      // Model.Division.hasMany(Model.BeatOffice, { foreignKey: 'divisionId' });
-
-      // Model.BeatOffice.belongsTo(Model.Branch, { foreignKey: 'branchId' });
-      // Model.BeatOffice.belongsTo(Model.Division, { foreignKey: 'divisionId' });
-      // Model.BeatOffice.belongsTo(Model.Institution, { foreignKey: 'institutionId' });
+      // define association here
     }
   }
   BeatOffice.init({

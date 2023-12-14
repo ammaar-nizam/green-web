@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // Model.Institution.hasMany(Model.BeatOffice, { foreignKey: 'institutionId' });
+      // define association here
     }
   }
   Institution.init({
