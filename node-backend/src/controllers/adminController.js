@@ -1,4 +1,4 @@
-const models = require('../models');
+const models = require('../models')
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
 const {validator, schemaForBeatOfficerAndAdmin} = require('../utils/validation');
