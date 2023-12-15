@@ -12,11 +12,17 @@ const SubmitComplaintPage = () => {
     office:"",
     incident: "",
     location: "",
+    image: null,
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const handleImageChange = (e) => {
+    const imageFile = e.target.files[0];
+    setFormData({ ...formData, image: imageFile });
   };
 
   const handleSubmit = async (e) => {
@@ -54,9 +60,17 @@ const SubmitComplaintPage = () => {
     console.log(formData);
 
     try {
-      // // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint where you want to submit the form data
-      // const response = await axios.post('YOUR_API_ENDPOINT', formData);
-      // console.log('Form submitted successfully!', response.data);
+      // const formDataToSend = new FormData();
+      // formDataToSend.append("institution", formData.institution);
+      // formDataToSend.append("division", formData.division);
+      // formDataToSend.append("branch", formData.branch);
+      // formDataToSend.append("office", formData.office);
+      // formDataToSend.append("incident", formData.incident);
+      // formDataToSend.append("location", formData.location);
+      // formDataToSend.append("image", formData.image); 
+
+      // const response = await axios.post("YOUR_API_ENDPOINT", formDataToSend);
+      // console.log("Form submitted successfully!", response.data);
     } catch (error) {
       console.error("Error submitting form:", error);
       setError("Error submitting form:", error);
@@ -182,6 +196,22 @@ const SubmitComplaintPage = () => {
             ></textarea>
           </div>
         </div>
+        <div className="row pt-3">
+        <div className="col-12">
+          <label htmlFor="image" className="submit-complain-label">
+            Upload Image:
+          </label>
+          <input
+            type="file"
+            accept="image/*"
+            className="form-control"
+            id="image"
+            name="image"
+            onChange={handleImageChange}
+            required
+          />
+        </div>
+      </div>
         <div className="row  pt-3">
           <div className="col-12">
             <label htmlFor="location" className="submit-complain-label mr-5">
