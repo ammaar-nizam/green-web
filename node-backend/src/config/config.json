@@ -1,24 +1,26 @@
 {
   "development": {
-    "username": "sql12668639",
-    "password": "iB79j43YlM",
-    "database": "sql12668639",
-    "host": "sql12.freesqldatabase.com",
-    "port": 3306,
-    "dialect": "mysql"
+    "username": "GreenWeb",
+    "password": "StrongPassword@123",
+    "database": "greenweb",
+    "host": "mysqlserver-greenweb.mysql.database.azure.com",
+    "dialect": "mysql",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   },
   "test": {
     "username": "root",
-    "password": null,
-    "database": "database_test",
+    "password": "StrongPassword@123",
+    "database": "greenweb",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "use_env_variable": "DATABASE_URI",
     "dialect": "mysql"
   }
 }

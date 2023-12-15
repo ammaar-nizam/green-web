@@ -9,13 +9,20 @@ const SubmitComplaintPage = () => {
     institution: "",
     division: "",
     branch: "",
+    office:"",
     incident: "",
     location: "",
+    image: null,
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const handleImageChange = (e) => {
+    const imageFile = e.target.files[0];
+    setFormData({ ...formData, image: imageFile });
   };
 
   const handleSubmit = async (e) => {
@@ -37,6 +44,11 @@ const SubmitComplaintPage = () => {
       setError("Please select branch.");
       return;
     }
+    else if (formData.office === '' || formData.office == 'selection')
+    {
+      setError("Please select a beat office office.");
+      return;
+    }
      else if (formData.location === "") {
       setError("Please add location of incident.");
       return;
@@ -48,9 +60,17 @@ const SubmitComplaintPage = () => {
     console.log(formData);
 
     try {
-      // // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint where you want to submit the form data
-      // const response = await axios.post('YOUR_API_ENDPOINT', formData);
-      // console.log('Form submitted successfully!', response.data);
+      // const formDataToSend = new FormData();
+      // formDataToSend.append("institution", formData.institution);
+      // formDataToSend.append("division", formData.division);
+      // formDataToSend.append("branch", formData.branch);
+      // formDataToSend.append("office", formData.office);
+      // formDataToSend.append("incident", formData.incident);
+      // formDataToSend.append("location", formData.location);
+      // formDataToSend.append("image", formData.image); 
+
+      // const response = await axios.post("YOUR_API_ENDPOINT", formDataToSend);
+      // console.log("Form submitted successfully!", response.data);
     } catch (error) {
       console.error("Error submitting form:", error);
       setError("Error submitting form:", error);
@@ -74,7 +94,7 @@ const SubmitComplaintPage = () => {
     } else {
       console.error("Geolocation is not supported by this browser.");
       setError("Geolocation is not supported by this browser.");
-      // Handle no geolocation support
+      
     }
   };
 
@@ -88,7 +108,7 @@ const SubmitComplaintPage = () => {
           </div>
         </div>
         <div className="row  pt-3">
-          <div className="col-12">
+          <div className="col-6">
             <label htmlFor="institution" className="submit-complain-label">
               Institution :
             </label>
@@ -105,8 +125,6 @@ const SubmitComplaintPage = () => {
               <option value="forest">Forest Conservations</option>
             </select>
           </div>
-        </div>
-        <div className="row  pt-3">
           <div className="col-md-6">
             <label htmlFor="division" className="submit-complain-label">
               Division :
@@ -124,8 +142,10 @@ const SubmitComplaintPage = () => {
               <option value="Anuradhapura">Anuradhapura</option>
             </select>
           </div>
+        </div>
+        <div className="row  pt-3">
           <div className="col-md-6">
-            <label htmlFor="branch" className="submit-complain-label">
+          <label htmlFor="branch" className="submit-complain-label">
               Branch :
             </label>
             <select
@@ -139,6 +159,23 @@ const SubmitComplaintPage = () => {
               <option value="selection">--Select Branch--</option>
               <option value="Wattala">Wattala</option>
               <option value="Ja Ela">Ja Ela</option>
+            </select>
+          </div>
+          <div className="col-md-6">
+            <label htmlFor="office" className="submit-complain-label">
+              Beat Office :
+            </label>
+            <select
+              className="form-control"
+              name="office"
+              id="office"
+              value={formData.office}
+              onChange={handleChange}
+              required
+            >
+              <option value="selection">--Select Beat Office--</option>
+              <option value="Wattala">Yala Wildlife BO</option>
+              <option value="Ja Ela">Monaragala Forest BO</option>
             </select>
           </div>
         </div>
@@ -159,6 +196,22 @@ const SubmitComplaintPage = () => {
             ></textarea>
           </div>
         </div>
+        <div className="row pt-3">
+        <div className="col-12">
+          <label htmlFor="image" className="submit-complain-label">
+            Upload Image:
+          </label>
+          <input
+            type="file"
+            accept="image/*"
+            className="form-control"
+            id="image"
+            name="image"
+            onChange={handleImageChange}
+            required
+          />
+        </div>
+      </div>
         <div className="row  pt-3">
           <div className="col-12">
             <label htmlFor="location" className="submit-complain-label mr-5">
