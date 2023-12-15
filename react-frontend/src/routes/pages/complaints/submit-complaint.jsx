@@ -94,7 +94,7 @@ const SubmitComplaintPage = () => {
     } else {
       console.error("Geolocation is not supported by this browser.");
       setError("Geolocation is not supported by this browser.");
-      // Handle no geolocation support
+      
     }
   };
 
