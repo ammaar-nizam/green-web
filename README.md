@@ -60,7 +60,7 @@ The project follows a structured organization:
 6. **Start Frontend Development Server**
    ```bash
    cd react-frontend
-   npm start
+   npm run dev
 
 ## Contributors
 
