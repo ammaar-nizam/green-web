@@ -43,7 +43,21 @@ const verifyTokenAndAdmin = (req, res, next) => {
     }catch(err){
         console.log("Your token is not valid or expired.");
     }
-  };
+};
+
+  const verifyTokenAndBeatOfficer = (req, res, next) => {
+    try{
+        verifyToken(req, res, () => {
+            if (req.user.roleId === 3) {
+              next();
+            } else {
+              return res.status(403).json({message: "You do not have beat officer privileges. Please login as a beat officer."});
+            }
+          });
+    }catch(err){
+        console.log("Your token is not valid or expired.");
+    }
+};
 
 const verifyTokenAndSuperAdmin = (req, res, next) => {
     try{
@@ -60,4 +74,6 @@ const verifyTokenAndSuperAdmin = (req, res, next) => {
     
 };
 
-module.exports = { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin, verifyTokenAndSuperAdmin };
+module.exports = { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin, verifyTokenAndBeatOfficer,
+    verifyTokenAndSuperAdmin
+};
