@@ -74,13 +74,15 @@ function getAllInstitutions(req, res){
 
 // Sequelize raw query to count number of complaints in each institution
 function countComplaintsPerEachInstitution(req, res){
+    const institutionId = req.params.id;
     const query = `
-            SELECT c.beatOfficeId AS beatOfficeId, COUNT(c.id) AS totalPerBeatOffice
-            FROM complaints c
-            GROUP BY c.beatOfficeId;
+        SELECT count(complaints.id) AS 'Total Complaints' FROM complaints 
+        WHERE complaints.beatOfficeId = ANY 
+        (SELECT DISTINCT beatoffices.id FROM beatoffices WHERE beatoffices.institutionId = ? );
             `;
     models.sequelize.query(query, {
-        type: models.sequelize.QueryTypes.SELECT
+        type: models.sequelize.QueryTypes.SELECT,
+        replacements: [institutionId]
     }).then((data) => {
         res.status(200).json(data);
     }).catch((err) => {
