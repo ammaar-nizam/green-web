@@ -1,24 +1,49 @@
+
 'use strict';
-const {
-  Model
-} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class BeatOffice extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
+  
+  const BeatOffice = sequelize.define('BeatOffice', {
+    name: {
+      type: DataTypes.STRING
+    },
+    branchId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Branches',
+        key: 'id'
+      }
+    },
+    divisionId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Divisions',
+        key: 'id'
+      }
+    },
+    institutionId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Institutions',
+        key: 'id'
+      }
+    },
+    createdAt: {
+      allowNull: false,
+      type: DataTypes.DATE
+    },
+    updatedAt: {
+      allowNull: false,
+      type: DataTypes.DATE
     }
-  }
-  BeatOffice.init({
-    name: DataTypes.STRING,
-    location: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'BeatOffice',
-  });
+  }, {sequelize});
+
+  BeatOffice.associate = function(models) {
+    BeatOffice.hasOne(sequelize.define('Branch'));
+    BeatOffice.hasOne(sequelize.define('Division'));
+    BeatOffice.hasOne(sequelize.define('Institution'));
+  };
+
+  BeatOffice.sync();
+
   return BeatOffice;
 };

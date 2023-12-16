@@ -1,24 +1,26 @@
+
 'use strict';
-const {
-  Model
-} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Branch extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
+  
+  const Branch = sequelize.define('Branch', {
+    name: {
+      type: DataTypes.STRING
+    },
+    createdAt: {
+      allowNull: false,
+      type: DataTypes.DATE
+    },
+    updatedAt: {
+      allowNull: false,
+      type: DataTypes.DATE
     }
-  }
-  Branch.init({
-    name: DataTypes.STRING,
-    location: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'Branch',
-  });
+  }, {sequelize});
+
+  Branch.associate = function(models) {
+    Branch.hasMany(sequelize.define('BeatOffice'));
+  };
+
+  Branch.sync();
+
   return Branch;
 };

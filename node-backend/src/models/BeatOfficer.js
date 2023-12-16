@@ -1,29 +1,39 @@
+
 'use strict';
-const {
-  Model
-} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class BeatOfficer extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
+  
+  const BeatOfficer = sequelize.define('BeatOfficer', {
+    name: {
+      type: DataTypes.STRING
+    },
+    username: {
+      type: DataTypes.STRING
+    },
+    email: {
+      type: DataTypes.STRING
+    },
+    password: {
+      type: DataTypes.STRING
+    },
+    roleId: {
+      type: DataTypes.INTEGER
+    },
+    beatOfficeId: {
+      type: DataTypes.INTEGER
+    },
+    createdAt: {
+      allowNull: false,
+      type: DataTypes.DATE
+    },
+    updatedAt: {
+      allowNull: false,
+      type: DataTypes.DATE
     }
-  }
-  BeatOfficer.init({
-    name: DataTypes.STRING,
-    nic: DataTypes.STRING,
-    username: DataTypes.STRING,
-    email: DataTypes.STRING,
-    mobile: DataTypes.INTEGER,
-    password: DataTypes.STRING,
-    roleId: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'BeatOfficer',
-  });
+  }, {sequelize});
+
+  BeatOfficer.associate = function(models) {
+    BeatOfficer.hasOne(sequelize.define('Role'));
+  };
+
   return BeatOfficer;
 };

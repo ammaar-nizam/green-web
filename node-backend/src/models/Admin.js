@@ -1,29 +1,38 @@
+
 'use strict';
-const {
-  Model
-} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Admin extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
+  
+  const Admin = sequelize.define('Admin', {
+    name: {
+      type: DataTypes.STRING
+    },
+    username: {
+      type: DataTypes.STRING
+    },
+    email: {
+      type: DataTypes.STRING
+    },
+    password: {
+      type: DataTypes.STRING
+    },
+    roleId: {
+      type: DataTypes.INTEGER
+    },
+    createdAt: {
+      allowNull: false,
+      type: DataTypes.DATE
+    },
+    updatedAt: {
+      allowNull: false,
+      type: DataTypes.DATE
     }
-  }
-  Admin.init({
-    name: DataTypes.STRING,
-    nic: DataTypes.STRING,
-    username: DataTypes.STRING,
-    email: DataTypes.STRING,
-    mobile: DataTypes.INTEGER,
-    password: DataTypes.STRING,
-    roleId: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'Admin',
-  });
+  }, {sequelize});
+
+  Admin.associate = function(models) {
+    Admin.hasOne(sequelize.define('Role'));
+  };
+
+  Admin.sync();
+
   return Admin;
 };

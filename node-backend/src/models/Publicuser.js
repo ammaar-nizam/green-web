@@ -1,29 +1,44 @@
+
 'use strict';
-const {
-  Model
-} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class PublicUser extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
+  
+  const PublicUser = sequelize.define('PublicUser', {
+    name: {
+      type: DataTypes.STRING
+    },
+    nic: {
+      type: DataTypes.STRING
+    },
+    username: {
+      type: DataTypes.STRING
+    },
+    email: {
+      type: DataTypes.STRING
+    },
+    mobile: {
+      type: DataTypes.INTEGER
+    },
+    password: {
+      type: DataTypes.STRING
+    },
+    roleId: {
+      type: DataTypes.INTEGER
+    },
+    createdAt: {
+      allowNull: false,
+      type: DataTypes.DATE
+    },
+    updatedAt: {
+      allowNull: false,
+      type: DataTypes.DATE
     }
-  }
-  PublicUser.init({
-    name: DataTypes.STRING,
-    nic: DataTypes.STRING,
-    username: DataTypes.STRING,
-    email: DataTypes.STRING,
-    mobile: DataTypes.INTEGER,
-    password: DataTypes.STRING,
-    roleId: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'PublicUser',
-  });
+  }, {sequelize});
+
+  PublicUser.associate = function(models) {
+    PublicUser.hasOne(sequelize.define('Role'));
+  };
+  
+  PublicUser.sync();
+
   return PublicUser;
 };

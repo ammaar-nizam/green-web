@@ -1,11 +1,16 @@
 {
   "development": {
-    "username": "sql12668639",
-    "password": "iB79j43YlM",
-    "database": "sql12668639",
-    "host": "sql12.freesqldatabase.com",
-    "port": 3306,
-    "dialect": "mysql"
+    "username": "GreenWeb",
+    "password": "StrongPassword@123",
+    "database": "greenweb",
+    "host": "mysqlserver-greenweb.mysql.database.azure.com",
+    "dialect": "mysql",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   },
   "test": {
     "username": "root",
