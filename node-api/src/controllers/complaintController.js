@@ -9,6 +9,7 @@ function create(req, res){
         description: req.body.description,
         evidence: req.file.filename,
         beatOfficeId: req.body.beatOfficeId,
+        location: req.body.location,
         status: 'NEW',
         publicUserId: req.user.id
     }

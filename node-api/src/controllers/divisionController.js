@@ -73,36 +73,47 @@ function getAllDivisions(req, res){
 }
 
 // Sequelize raw query to get divisions that belong to a given institution (i.e., Wildlife or Forestry and Environmental)
-async function getAllDivisionsByInstitutionIdRawQuery(institutionId){
-    try{
-        const query = `
-        SELECT DISTINCT d.name 
-        FROM beatoffices bo
-        LEFT JOIN divisions d ON bo.divisionId = d.id
-        LEFT JOIN institutions i ON bo.institutionId = i.id
-        WHERE i.id = :id;
-      `;
-      const divisions = sequelize.query(query, {
-          type: QueryTypes.SELECT,
-          replacements: { institutionId },
-        });
-      return divisions;
-    }catch(err){
-        throw new Error(`Error executing query: ${err}`);
-    }
-}
-
-// Using the above raw query method
-async function getAllDivisionsByInstitutionId(req, res){
-    try {
-        const divisionNames = await getAllDivisionsByInstitutionIdRawQuery(req.params.id);
-        res.status(200).json({ divisionNames });
-      } catch (err) {
-        res.status(500).json({ 
+function getAllDivisionsByInstitutionId(req, res){
+    const institutionId = req.params.id;
+    const query = `
+            SELECT d.name 
+            FROM beatoffices bo
+            LEFT JOIN divisions d ON bo.divisionId = d.id
+            LEFT JOIN institutions i ON bo.institutionId = i.id
+            WHERE i.id = ?;
+            `;
+    models.sequelize.query(query, {
+        type: models.sequelize.QueryTypes.SELECT,
+        replacements: [institutionId]
+    }).then((data) => {
+        res.status(200).json(data);
+    }).catch((err) => {
+        res.status(500).json({
             message: "Error retrieving all divisions for the given institution.",
-            error: err 
+            error: err
         });
-      }
+    });
 }
 
-module.exports = {create, getDivisionById, getAllDivisions, getAllDivisionsByInstitutionId}
+// Sequelize raw query to count number of complaints in each division
+function countComplaintsPerEachDivision(req, res){
+    const query = `
+            SELECT c.beatOfficeId AS beatOfficeId, COUNT(c.id) AS totalPerBeatOffice
+            FROM complaints c
+            GROUP BY c.beatOfficeId;
+            `;
+    models.sequelize.query(query, {
+        type: models.sequelize.QueryTypes.SELECT
+    }).then((data) => {
+        res.status(200).json(data);
+    }).catch((err) => {
+        res.status(500).json({
+            message: "Error counting complaints per beat office.",
+            error: err
+        });
+    });
+}
+
+module.exports = {create, getDivisionById, getAllDivisions, getAllDivisionsByInstitutionId,
+    countComplaintsPerEachDivision
+}
