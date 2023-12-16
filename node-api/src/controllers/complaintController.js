@@ -1,20 +1,19 @@
 const models = require('../models');
-const CryptoJS = require("crypto-js");
 const multer = require('multer')
 const path = require('path')
-const {validator, schemaForComplaint} = require('../utils/validation');
+const {validator, schemaForCheckingDescription} = require('../utils/validation');
 
 // Create complaint
 function create(req, res){
-    console.log(req.file);
    const complaint = {
         description: req.body.description,
         evidence: req.file.filename,
+        beatOfficeId: req.body.beatOfficeId,
         status: 'NEW',
         publicUserId: req.user.id
     }
     // Validate user input
-    const validationResponse = validator.validate(complaint, schemaForComplaint);
+    const validationResponse = validator.validate(complaint, schemaForCheckingDescription);
     if(validationResponse !== true){
         res.status(400).json({
             message: "Validation failed.",
