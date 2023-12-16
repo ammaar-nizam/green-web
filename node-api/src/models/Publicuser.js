@@ -40,6 +40,8 @@ module.exports = (sequelize, DataTypes) => {
 
   PublicUser.associate = function(models) {
     PublicUser.hasOne(sequelize.define('Role'));
+    PublicUser.hasMany(sequelize.define('Complaint'));
+    PublicUser.hasMany(sequelize.define('Notification'));
   };
 
   return PublicUser;

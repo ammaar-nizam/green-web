@@ -68,8 +68,18 @@ const schemaForBeatOffice = {
     }}
 }
 
+// Define a schema to validate the user input (complaint)
+const schemaForComplaint = {    
+    description: {type: "string", optional: false, max: "1000", message: {
+        optional: "Description cannot be empty",
+        max: "Description cannot exceed 1000 characters."
+    }}
+}
+
 const validator = new Validator();
 
 module.exports = {
-    validator, schemaForPublicUser, schemaForBeatOfficerAndAdmin, schemaForInstitutionAndDivisionAndBranch, schemaForBeatOffice
+    validator, schemaForPublicUser, schemaForBeatOfficerAndAdmin, 
+    schemaForInstitutionAndDivisionAndBranch, schemaForBeatOffice,
+    schemaForComplaint
 }

@@ -24,6 +24,7 @@ dotenv.config();
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }))
 
 app.use("/api/admins", adminRoute);
 app.use("/api/beat-offices", beatOfficeRoute);
@@ -38,6 +39,8 @@ app.use("/api/public-users", publicUserRoute);
 app.use("/api/registrations", registrationRoute);
 app.use("/api/roles", roleRoute);
 app.use("/api", commonRoute);
+
+app.use('/uploads', express.static('./uploads'))
 
 app.listen(process.env.PORT || 5000, () => {
   console.log("Backend server is running!");
