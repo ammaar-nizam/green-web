@@ -6,6 +6,10 @@ const useAuthToken = () => {
     let email = ''
     let roleId = ''
 
+    if(!accessToken) {
+        window.location.href = "/";
+    }
+
     const decodedToken = jwtDecode(accessToken);
     if (decodedToken) {
         userId = decodedToken.id
