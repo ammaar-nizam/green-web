@@ -1,4 +1,4 @@
-export const userRole = 'officer';
+export const userRole = 'public';
 export const forestStats = [
     {
         title: "All Complaints",

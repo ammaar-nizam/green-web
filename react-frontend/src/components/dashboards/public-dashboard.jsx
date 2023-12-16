@@ -1,7 +1,6 @@
 import React from "react";
 import Notifications from "../notifications";
-import DashboardCard from "../dashboard-card";
-import { complaints, forestStats, notifications } from "../../data/dummy-data";
+import { complaints, notifications } from "../../data/dummy-data";
 
 const PublicDashboard = () => {
   return (

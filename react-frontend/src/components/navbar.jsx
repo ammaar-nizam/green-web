@@ -4,8 +4,10 @@ import PublicLinks from "./nav-links/public-links";
 import AdminLinks from "./nav-links/admin-links";
 import { userRole } from "../data/dummy-data";
 import OfficerLinks from "./nav-links/officer-links";
+import useAuthToken from "../hooks/useAuthToken";
 
 const Navbar = () => {
+  const { roleId } = useAuthToken();
   return (
     <nav className="navbar navbar-expand-md sticky-top navbar-light bg-light px-5">
       <Link to="/dashboard" className="navbar-brand">
@@ -24,9 +26,9 @@ const Navbar = () => {
       </button>
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div className="navbar-nav">
-          {userRole === "public" && <PublicLinks />}
-          {userRole === "admin" && <AdminLinks />}
-          {userRole === "officer" && <OfficerLinks />}
+          {roleId === 1 && <PublicLinks />}
+          {roleId === 2 && <AdminLinks />}
+          {roleId === 3 && <OfficerLinks />}
         </div>
       </div>
     </nav>
