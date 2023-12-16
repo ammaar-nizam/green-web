@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ErrorMessage } from "../../../components/alert-message";
 import { API_URL } from "../../../config/config";
+import Loader from "../../../components/loader";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userRole, setUserRole] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const roleOptions = [
     { value: "publicUser", label: "Public User" },
@@ -29,7 +31,7 @@ const LoginPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    setLoading(true);
     // validations
     if (!userRole) {
       setError("Please select the user role");
@@ -91,8 +93,12 @@ const LoginPage = () => {
       return;
     } finally {
       setError(null);
+      setLoading(false);
     }
   };
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div>

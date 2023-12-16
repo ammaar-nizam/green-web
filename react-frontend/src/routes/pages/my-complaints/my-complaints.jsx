@@ -1,20 +1,72 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { complaints } from "../../../data/dummy-data";
+import { API_URL } from "../../../config/config";
+import useAuthToken from "../../../hooks/useAuthToken";
+import { ErrorMessage, InfoMessage } from "../../../components/alert-message";
+import Loader from "../../../components/loader";
 
 const MyComplaints = () => {
+  const [loading, setLoading] = useState(false);
+  const { accessToken } = useAuthToken();
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(API_URL + "/complaints/my-complaints", {
+          headers: {
+            Token: "Bearer " + accessToken,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch data. Please try again");
+        }
+
+        const result = await response.json();
+        setData(result);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
+
   // extract all keys for the table headers
   let allKeys = null;
-  if (complaints.length > 0) {
+  if (data && data.length > 0) {
     // all keys except for "Category"
     allKeys = Array.from(
-      new Set(complaints.flatMap((complaint) => Object.keys(complaint)))
-    ).filter((key) => key !== "category");
+      new Set(data.flatMap((complaint) => Object.keys(complaint)))
+    ).filter(
+      (key) =>
+        ![
+          "adminId",
+          "beatOfficeId",
+          "beatOfficerId",
+          "publicUserId",
+          "evidence",
+          "createdAt",
+          "updatedAt",
+        ].includes(key)
+    );
+    // .filter((key) => key !== "category");
   } else {
     return <InfoMessage message="No complaints found!" />;
   }
 
   return (
     <div>
+      {error && <ErrorMessage message={error} />}
       <table className="table">
         <thead>
           <tr>
@@ -23,16 +75,18 @@ const MyComplaints = () => {
                 {item}
               </th>
             ))}
+            <th scope="col" className="text-uppercase">
+              Date Complained
+            </th>
           </tr>
         </thead>
         <tbody>
-          {complaints.map((complaint, index) => (
+          {data.map((complaint, index) => (
             <tr key={index}>
               <th scope="row">{complaint.id}</th>
-              <td>{complaint.subject}</td>
-              <td>{complaint.description}</td>
-              <td>{complaint.status}</td>
-              <td>{complaint.date}</td>
+              <td>{complaint.description ?? 'N/A'}</td>
+              <td>{complaint.status ?? 'N/A'}</td>
+              <td>{complaint.createdAt ?? 'N/A'}</td>
             </tr>
           ))}
         </tbody>

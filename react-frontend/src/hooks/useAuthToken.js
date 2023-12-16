@@ -13,7 +13,7 @@ const useAuthToken = () => {
         roleId = decodedToken.roleId
     }
 
-    return { userId, email, roleId }
+    return { userId, email, roleId, accessToken }
 }
 
 export default useAuthToken
