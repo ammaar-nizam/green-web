@@ -5,6 +5,9 @@ module.exports = (sequelize, DataTypes) => {
     description: {
       type: DataTypes.TEXT('long')
     },
+    location: {
+      type: DataTypes.TEXT('long')
+    },
     evidence: {
         type: DataTypes.STRING
     },

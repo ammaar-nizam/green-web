@@ -8,6 +8,7 @@ function create(req, res){
    const complaint = {
         description: req.body.description,
         evidence: req.file.filename,
+        location: req.body.location,
         beatOfficeId: req.body.beatOfficeId,
         status: 'NEW',
         publicUserId: req.user.id
