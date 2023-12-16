@@ -72,6 +72,10 @@ const LoginPage = () => {
         body: JSON.stringify({ email, password }),
       });
 
+      if (!response.ok) {
+        throw new Error("Something went wrong. Please try again later.");
+      }
+
       if (response.ok) {
         const data = await response.json();
         console.log("Login successful:", data);
@@ -89,7 +93,7 @@ const LoginPage = () => {
       }
     } catch (error) {
       console.error("Error during login:", error);
-      setError("Something went wrong. Please try again later.");
+      setError(error.message);
       return;
     } finally {
       setError(null);
