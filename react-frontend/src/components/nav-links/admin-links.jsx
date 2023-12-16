@@ -20,7 +20,9 @@ const AdminLinks = () => {
       </Link>
       <Link
         to={"/users"}
-        className={`nav-link ${pathname === "/users" ? "active" : ""}`}
+        className={`nav-link ${
+          currentURL.includes("/users") ? "active" : ""
+        }`}
       >
         Users
       </Link>

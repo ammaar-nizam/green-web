@@ -9,6 +9,10 @@ import DashboardPage from "./routes/pages/dashboard/dashboard";
 import AuthLayout from "./layouts/auth-layout";
 import LoginPage from "./routes/pages/auth/login";
 import SignupPage from "./routes/pages/auth/signup";
+import UsersPage from "./routes/pages/users/users";
+import AllUsersPage from "./routes/pages/users/all";
+import CreateUserPage from "./routes/pages/users/create";
+import CreatePublicUserPage from "./routes/pages/users/create/public-user";
 
 function App() {
   return (
@@ -22,6 +26,14 @@ function App() {
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="new-complaint" element={<SubmitComplaintPage />} />
           <Route path="my-complaints" element={<MyComplaints />} />
+          <Route path="users" >
+            <Route index element={<UsersPage />} />
+            <Route path="all" element={<AllUsersPage />} />
+            <Route path="create" >
+              <Route index element={<CreateUserPage />} />
+              <Route path="public" element={<CreatePublicUserPage />} />
+            </Route>
+          </Route>
 
           <Route path="reports">
             <Route index element={<Reports />} />

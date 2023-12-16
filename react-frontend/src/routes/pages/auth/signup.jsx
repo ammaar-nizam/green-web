@@ -31,7 +31,6 @@ const SignupPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setLoading(true);
 
     // validation
     if (!formData.name) {
@@ -69,6 +68,7 @@ const SignupPage = () => {
     }
 
     try {
+      setLoading(true);
       const formDataWithoutPWConfirmation = { ...formData };
       delete formDataWithoutPWConfirmation.confirmPassword;
 
