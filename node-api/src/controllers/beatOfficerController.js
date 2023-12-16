@@ -53,10 +53,10 @@ function create(req, res){
 
 // Logging in as a beat officer
 function login(req, res){
-    models.BeatOfficer.findOne({where: {username: req.body.username, email:req.body.email}}).then((beatOfficer) => {
+    models.BeatOfficer.findOne({where: {email:req.body.email}}).then((beatOfficer) => {
         if(beatOfficer === null){
             res.status(401).json({
-                message: "Either incorrect username or email."
+                message: "Incorrect email."
             });
         }else{
             const hashedPassword = CryptoJS.AES.decrypt(

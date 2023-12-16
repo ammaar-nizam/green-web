@@ -55,10 +55,10 @@ function registerAsPublicUser(req, res){
 
 // Logging in as a public user
 function loginAsPublicUser(req, res){
-    models.PublicUser.findOne({where: {username: req.body.username, email:req.body.email}}).then((publicUser) => {
+    models.PublicUser.findOne({where: {email:req.body.email}}).then((publicUser) => {
         if(publicUser === null){
             res.status(401).json({
-                message: "Either incorrect username or email."
+                message: "Incorrect email."
             });
         }else{
             const hashedPassword = CryptoJS.AES.decrypt(
