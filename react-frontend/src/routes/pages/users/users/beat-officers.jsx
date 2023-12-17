@@ -50,8 +50,32 @@ const BeatOfficesPage = () => {
     console.log(id);
   };
   // function to handle delete admin users
-  const handleDelete = (id) => {
-    console.log(id);
+  const handleDelete = async (id) => {
+    try {
+      setLoading(true)
+      const response = await fetch(API_URL + '/beat-officers/' + id, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Token: "Bearer " + accessToken,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete data');
+      }
+
+      const result = await response.json();
+      setSuccess(result.message)
+      // reload page update table after 2s
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false)
+    }
   };
 
   // extract all keys for the table headers
