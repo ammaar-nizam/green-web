@@ -3,7 +3,10 @@ module.exports = (sequelize, DataTypes) => {
   
   const Complaint = sequelize.define('Complaint', {
     description: {
-      type: DataTypes.TEXT('long')
+        type: DataTypes.TEXT('long')
+    },
+    location: {
+        type: DataTypes.TEXT('long')
     },
     location: {
       type: DataTypes.TEXT('long')
@@ -16,25 +19,25 @@ module.exports = (sequelize, DataTypes) => {
         values: ['NEW', 'IN PROGRESS', 'UNDER INVESTIGATION', 'RESOLVED', 'REJECTED']   
     },
     beatOfficerId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'BeatOffice',
-        key: 'id'
-      }
+        type: DataTypes.INTEGER,
+        references: {
+            model: 'BeatOffice',
+            key: 'id'
+        }
     },
     adminId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'Admin',
-        key: 'id'
-      }
+        type: DataTypes.INTEGER,
+        references: {
+            model: 'Admin',
+            key: 'id'
+        }
     },
     publicUserId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'PublicUser',
-        key: 'id'
-      }
+        type: DataTypes.INTEGER,
+        references: {
+            model: 'PublicUser',
+            key: 'id'
+        }
     },
     beatOfficeId: {
         type: DataTypes.INTEGER,

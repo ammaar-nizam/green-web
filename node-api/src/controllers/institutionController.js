@@ -72,4 +72,25 @@ function getAllInstitutions(req, res){
     });
 }
 
-module.exports = {create, getInstitutionById, getAllInstitutions}
+// Sequelize raw query to count number of complaints in each institution
+function countComplaintsPerEachInstitution(req, res){
+    const institutionId = req.params.id;
+    const query = `
+        SELECT count(complaints.id) AS 'Total Complaints' FROM complaints 
+        WHERE complaints.beatOfficeId = ANY 
+        (SELECT DISTINCT beatoffices.id FROM beatoffices WHERE beatoffices.institutionId = ? );
+            `;
+    models.sequelize.query(query, {
+        type: models.sequelize.QueryTypes.SELECT,
+        replacements: [institutionId]
+    }).then((data) => {
+        res.status(200).json(data);
+    }).catch((err) => {
+        res.status(500).json({
+            message: "Error counting complaints per beat office.",
+            error: err
+        });
+    });
+}
+
+module.exports = {create, getInstitutionById, getAllInstitutions, countComplaintsPerEachInstitution}
