@@ -14,6 +14,7 @@ import AllUsersPage from "./routes/pages/users/all";
 import CreateUserPage from "./routes/pages/users/create";
 import CreatePublicUserPage from "./routes/pages/users/create/public-user";
 import CreateAdminUserPage from "./routes/pages/users/create/admin-user";
+import CreateBeatOfficerPage from "./routes/pages/users/create/beat-officer";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
               <Route index element={<CreateUserPage />} />
               <Route path="public" element={<CreatePublicUserPage />} />
               <Route path="admin" element={<CreateAdminUserPage />} />
+              <Route path="beat-officer" element={<CreateBeatOfficerPage />} />
             </Route>
           </Route>
 

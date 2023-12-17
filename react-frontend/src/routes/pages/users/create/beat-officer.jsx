@@ -3,16 +3,16 @@ import {
   ErrorMessage,
   SuccessMessage,
 } from "../../../../components/alert-message";
-import Loader from "../../../../components/loader";
 import { API_URL } from "../../../../config/config";
+import useAuthToken from "../../../../hooks/useAuthToken";
+import Loader from "../../../../components/loader";
 
-const CreatePublicUserPage = () => {
+const CreateBeatOfficerPage = () => {
+  const { accessToken } = useAuthToken()
   const [formData, setFormData] = useState({
     name: "",
-    nic: "",
     username: "",
     email: "",
-    mobile: "",
     password: "",
   });
   const [error, setError] = useState("");
@@ -29,16 +29,13 @@ const CreatePublicUserPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
+
     // validation
     if (!formData.name) {
       setError("Please enter name");
       return;
     } else if (!formData.username) {
       setError("Please enter a user name");
-      return;
-    } else if (!formData.nic) {
-      setError("Please enter NIC number");
       return;
     } else if (!formData.email) {
       setError("Please enter email address");
@@ -51,20 +48,17 @@ const CreatePublicUserPage = () => {
         return;
       }
     }
-    if (!formData.mobile) {
-      setError("Please enter mobile number");
-      return;
-    } else if (!formData.password) {
+    if (!formData.password) {
       setError("Please enter a password");
       return;
     }
-
     try {
       setLoading(true);
-      const response = await fetch(API_URL + "/registrations/register", {
+      const response = await fetch(API_URL + "/beat-officers", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Token: "Bearer " + accessToken,
         },
         body: JSON.stringify(formData),
       });
@@ -83,15 +77,13 @@ const CreatePublicUserPage = () => {
       }
     } catch (error) {
       console.error("Error during user creation:", error);
-      setError(error);
+      setError("Error occurred. Please try again later");
       return;
     } finally {
       setFormData({
         name: "",
-        nic: "",
         username: "",
         email: "",
-        mobile: "",
         password: "",
       });
       setError(null);
@@ -116,7 +108,7 @@ const CreatePublicUserPage = () => {
           </div>
         )}
         <div className="w-100">
-          <h4>Create Public User</h4>
+          <h4>Create Beat Officer</h4>
         </div>
         <form onSubmit={handleSubmit} className="mt-4">
           <div className="row">
@@ -147,18 +139,6 @@ const CreatePublicUserPage = () => {
           </div>
           <div className="row">
             <div className="col-md-6 mb-4">
-              <label htmlFor="nic">NIC Number</label>
-              <input
-                type="text"
-                className="form-control"
-                id="nic"
-                name="nic"
-                placeholder="Enter public users NIC number"
-                value={formData.nic}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="col-md-6 mb-4">
               <label htmlFor="email">Email</label>
               <input
                 type="text"
@@ -167,20 +147,6 @@ const CreatePublicUserPage = () => {
                 name="email"
                 placeholder="Enter public users email address"
                 value={formData.email}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-6 mb-4">
-              <label htmlFor="mobile">Mobile Number</label>
-              <input
-                type="text"
-                className="form-control"
-                id="mobile"
-                name="mobile"
-                placeholder="Enter public users mobile number"
-                value={formData.mobile}
                 onChange={handleChange}
               />
             </div>
@@ -208,4 +174,4 @@ const CreatePublicUserPage = () => {
   );
 };
 
-export default CreatePublicUserPage;
+export default CreateBeatOfficerPage;

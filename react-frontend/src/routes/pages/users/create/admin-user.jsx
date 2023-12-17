@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import { ErrorMessage, SuccessMessage } from '../../../../components/alert-message'
 import { API_URL } from '../../../../config/config';
 import Loader from '../../../../components/loader';
+import useAuthToken from '../../../../hooks/useAuthToken';
 
 const CreateAdminUserPage = () => {
+  const { accessToken } = useAuthToken();
   const [formData, setFormData] = useState({
     name: "",
     username: "",
@@ -53,12 +55,12 @@ const CreateAdminUserPage = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Token: "Bearer " + accessToken,
         },
         body: JSON.stringify(formData),
       });
       if (!response.ok) {
         console.log(response);
-        // FIXME: getting errors in admin user creation
         throw new Error("Something went wrong. Please try again later.");
       }
 
@@ -102,6 +104,9 @@ const CreateAdminUserPage = () => {
             <SuccessMessage message={success} />
           </div>
         )}
+        <div className='w-100'>
+          <h4>Create Admin User</h4>
+        </div>
         <form onSubmit={handleSubmit} className="mt-4">
           <div className="row">
             <div className="col-md-6 mb-4">
