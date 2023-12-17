@@ -32,7 +32,7 @@ const LoginPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setLoading(true);
+    
     // validations
     if (!userRole) {
       setError("Please select the user role");
@@ -65,6 +65,7 @@ const LoginPage = () => {
     }
 
     try {
+      setLoading(true);
       const response = await fetch(endpoint, {
         method: "POST",
         headers: {
