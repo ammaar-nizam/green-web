@@ -2,11 +2,16 @@ import React, { useEffect, useState } from "react";
 import useAuthToken from "../../../../hooks/useAuthToken";
 import { API_URL } from "../../../../config/config";
 import Loader from "../../../../components/loader";
-import { ErrorMessage, SuccessMessage } from "../../../../components/alert-message";
+import {
+  ErrorMessage,
+  InfoMessage,
+  SuccessMessage,
+} from "../../../../components/alert-message";
 
 import { FaRegEdit } from "react-icons/fa";
 import { MdOutlineDelete } from "react-icons/md";
 import { dateFormat } from "../../../../utils/utils";
+import UnauthorizedPage from "../../errors/403";
 
 const AdminUsersPage = () => {
   const { accessToken } = useAuthToken();
@@ -14,6 +19,7 @@ const AdminUsersPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState("");
+  const [authorized, setAuthorized] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,6 +31,9 @@ const AdminUsersPage = () => {
             Token: "Bearer " + accessToken,
           },
         });
+        if (response.status == 403) {
+          setAuthorized(false);
+        }
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
@@ -44,6 +53,9 @@ const AdminUsersPage = () => {
   if (loading) {
     return <Loader />;
   }
+  if (!authorized) {
+    return <UnauthorizedPage />;
+  }
 
   // function to handle edit admin users
   const handleEdit = (id) => {
@@ -52,21 +64,21 @@ const AdminUsersPage = () => {
   // function to handle delete admin users
   const handleDelete = async (id) => {
     try {
-      setLoading(true)
-      const response = await fetch(API_URL + '/admins/' + id, {
-        method: 'DELETE',
+      setLoading(true);
+      const response = await fetch(API_URL + "/admins/" + id, {
+        method: "DELETE",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Token: "Bearer " + accessToken,
         },
       });
 
       if (!response.ok) {
-        throw new Error('Failed to delete data');
+        throw new Error("Failed to delete data");
       }
 
       const result = await response.json();
-      setSuccess(result.message)
+      setSuccess(result.message);
       // reload page update table after 2s
       setTimeout(() => {
         window.location.reload();
@@ -74,13 +86,13 @@ const AdminUsersPage = () => {
     } catch (error) {
       setError(error.message);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
 
   // extract all keys for the table headers
   let allKeys = null;
-  if (users.length > 0) {
+  if (users && users.length > 0) {
     allKeys = Array.from(new Set(users.flatMap((user) => Object.keys(user))));
   } else {
     return <InfoMessage message="No users found!" />;
