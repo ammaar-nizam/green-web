@@ -18,6 +18,7 @@ import CreateBeatOfficerPage from "./routes/pages/users/create/beat-officer";
 import AdminUsersPage from "./routes/pages/users/users/admins";
 import PublicUsersPage from "./routes/pages/users/users/public";
 import BeatOfficesPage from "./routes/pages/users/users/beat-officers";
+import InstitutionPage from "./routes/pages/institution/institution";
 
 function App() {
   return (
@@ -31,21 +32,22 @@ function App() {
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="new-complaint" element={<SubmitComplaintPage />} />
           <Route path="my-complaints" element={<MyComplaints />} />
-          <Route path="users" >
+          <Route path="users">
             <Route index element={<UsersPage />} />
-            <Route path="all" >
+            <Route path="all">
               <Route index element={<AllUsersPage />} />
               <Route path="public" element={<PublicUsersPage />} />
               <Route path="beat-officer" element={<BeatOfficesPage />} />
               <Route path="admin" element={<AdminUsersPage />} />
             </Route>
-            <Route path="create" >
+            <Route path="create">
               <Route index element={<CreateUserPage />} />
               <Route path="public" element={<CreatePublicUserPage />} />
               <Route path="admin" element={<CreateAdminUserPage />} />
               <Route path="beat-officer" element={<CreateBeatOfficerPage />} />
             </Route>
           </Route>
+          <Route path="institutions" element={<InstitutionPage />} />
 
           <Route path="reports">
             <Route index element={<Reports />} />

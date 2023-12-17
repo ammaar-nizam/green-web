@@ -27,6 +27,38 @@ const AdminLinks = () => {
         Users
       </Link>
       <Link
+        to={"/institutions"}
+        className={`nav-link ${
+          currentURL.includes("/institutions") ? "active" : ""
+        }`}
+      >
+        Institutions
+      </Link>
+      <Link
+        to={"/divisions"}
+        className={`nav-link ${
+          currentURL.includes("/divisions") ? "active" : ""
+        }`}
+      >
+        Divisions
+      </Link>
+      <Link
+        to={"/branches"}
+        className={`nav-link ${
+          currentURL.includes("/branches") ? "active" : ""
+        }`}
+      >
+        Branches
+      </Link>
+      <Link
+        to={"/beat-offices"}
+        className={`nav-link ${
+          currentURL.includes("/beat-offices") ? "active" : ""
+        }`}
+      >
+        Beat Offices
+      </Link>
+      <Link
         to={"/contact"}
         className={`nav-link ${pathname === "/contact" ? "active" : ""}`}
       >

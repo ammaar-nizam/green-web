@@ -7,7 +7,7 @@ import OfficerLinks from "./nav-links/officer-links";
 import useAuthToken from "../hooks/useAuthToken";
 
 const Navbar = () => {
-  const { roleId } = useAuthToken();
+  const { roleId, email } = useAuthToken();
 
   const handleLogout = () => {
     // delete jwt token stored in local storage
@@ -38,7 +38,10 @@ const Navbar = () => {
           {roleId === 3 && <OfficerLinks />}
         </div>
       </div>
-      <button className="btn btn-sm btn-light d-none d-md-block" onClick={handleLogout}>Logout</button>
+      <div className="d-none d-md-flex">
+        <p className="text-muted my-auto ">{email}</p>
+        <button className="btn btn-sm btn-light" onClick={handleLogout}>Logout</button>
+      </div>
     </nav>
   );
 };
