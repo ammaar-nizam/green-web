@@ -4,9 +4,9 @@ import { API_URL } from '../../../config/config';
 import { ErrorMessage, InfoMessage, SuccessMessage } from '../../../components/alert-message';
 import Loader from '../../../components/loader';
 import { dateFormat } from '../../../utils/utils';
-import InstitutionForm from '../../../components/forms/institution-form';
+import BranchForm from '../../../components/forms/branch-form';
 
-const InstitutionPage = () => {
+const BranchPage = () => {
     const { accessToken } = useAuthToken();
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -15,7 +15,7 @@ const InstitutionPage = () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch(API_URL + "/institutions", {
+          const response = await fetch(API_URL + "/branches", {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -47,7 +47,7 @@ const InstitutionPage = () => {
     if (data.length > 0) {
       allKeys = Array.from(new Set(data.flatMap((item) => Object.keys(item))));
     } else {
-      return <InfoMessage message="No institutions found!" />;
+      return <InfoMessage message="No branches found!" />;
     }
     const itemsToRemove = ["updatedAt"];
     allKeys = allKeys.filter((item) => !itemsToRemove.includes(item));
@@ -60,9 +60,9 @@ const InstitutionPage = () => {
         </div>
       )}
       <div className="d-md-flex justify-content-between">
-        <h2 className="">Institutions</h2>
+        <h2 className="">Branches</h2>
         {/* <Link to="/institutions/create" className='btn btn-dark'>Create</Link> */}
-        <InstitutionForm />
+        <BranchForm />
       </div>
       <div className="mt-5 mb-5">
         <table className="table">
@@ -90,4 +90,4 @@ const InstitutionPage = () => {
   )
 }
 
-export default InstitutionPage
+export default BranchPage

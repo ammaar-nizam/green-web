@@ -11,7 +11,6 @@ const DivisionPage = () => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [success, setSuccess] = useState("");
   
     useEffect(() => {
       const fetchData = async () => {
@@ -58,11 +57,6 @@ const DivisionPage = () => {
       {error && (
         <div className="mt-2">
           <ErrorMessage message={error.message} />
-        </div>
-      )}
-      {success && (
-        <div className="mt-2">
-          <SuccessMessage message={success} />
         </div>
       )}
       <div className="d-md-flex justify-content-between">

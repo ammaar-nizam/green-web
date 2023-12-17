@@ -20,6 +20,7 @@ import PublicUsersPage from "./routes/pages/users/users/public";
 import BeatOfficesPage from "./routes/pages/users/users/beat-officers";
 import InstitutionPage from "./routes/pages/institution/institution";
 import DivisionPage from "./routes/pages/division/division";
+import BranchPage from "./routes/pages/branch/branch";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
           </Route>
           <Route path="institutions" element={<InstitutionPage />} />
           <Route path="divisions" element={<DivisionPage />} />
+          <Route path="branches" element={<BranchPage />} />
 
           <Route path="reports">
             <Route index element={<Reports />} />
