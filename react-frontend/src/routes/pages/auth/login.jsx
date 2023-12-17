@@ -15,6 +15,7 @@ const LoginPage = () => {
     { value: "publicUser", label: "Public User" },
     { value: "beatOfficer", label: "Beat Officer" },
     { value: "admin", label: "Admin User" },
+    { value: "superAdmin", label: "Super Admin" },
   ];
 
   const handleEmailChange = (event) => {
@@ -59,7 +60,7 @@ const LoginPage = () => {
       endpoint = API_URL + "/registrations/login";
     } else if (userRole == "beatOfficer") {
       endpoint = API_URL + "/beat-officers/login";
-    } else if (userRole == "admin") {
+    } else if (userRole == "admin" || userRole == "superAdmin") {
       endpoint = API_URL + "/admins/login";
     }
 
