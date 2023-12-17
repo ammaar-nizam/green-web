@@ -8,6 +8,13 @@ import useAuthToken from "../hooks/useAuthToken";
 
 const Navbar = () => {
   const { roleId } = useAuthToken();
+
+  const handleLogout = () => {
+    // delete jwt token stored in local storage
+    localStorage.removeItem('jwtToken');
+    window.location.href = '/';
+  };
+
   return (
     <nav className="navbar navbar-expand-md sticky-top navbar-light bg-light px-5">
       <Link to="/dashboard" className="navbar-brand">
@@ -31,6 +38,7 @@ const Navbar = () => {
           {roleId === 3 && <OfficerLinks />}
         </div>
       </div>
+      <button className="btn btn-sm btn-light d-none d-md-block" onClick={handleLogout}>Logout</button>
     </nav>
   );
 };
