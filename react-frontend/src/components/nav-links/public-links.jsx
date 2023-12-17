@@ -14,29 +14,29 @@ const PublicLinks = () => {
         Dashboard
       </Link>
       <Link
-        to={"/new-complaint"}
+        to={"/complaints/new-complaint"}
         className={`nav-item nav-link ${
-          pathname === "/new-complaint" ? "active" : ""
+          pathname === "/complaints/new-complaint" ? "active" : ""
         }`}
       >
         New Complaint
       </Link>
       <Link
-        to={"/my-complaints"}
+        to={"/complaints/my-complaints"}
         className={`nav-item nav-link ${
-          pathname === "/my-complaints" ? "active" : ""
+          pathname === "/complaints/my-complaints" ? "active" : ""
         }`}
       >
         My Complaints
       </Link>
-      <Link
+      {/* <Link
         to={"/contact"}
         className={`nav-item nav-link ${
           pathname === "/contact" ? "active" : ""
         }`}
       >
         Contact
-      </Link>
+      </Link> */}
     </>
   );
 };

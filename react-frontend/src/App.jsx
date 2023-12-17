@@ -4,7 +4,7 @@ import MainLayout from "./layouts/main-layout";
 import Reports from "./routes/pages/reports/reports";
 import AllUserReport from "./routes/pages/reports/all-user-report";
 import AllComplaintReport from "./routes/pages/reports/all-complaint-report";
-import MyComplaints from "./routes/pages/my-complaints/my-complaints";
+import MyComplaints from "./routes/pages/complaints/my-complaints/my-complaints";
 import DashboardPage from "./routes/pages/dashboard/dashboard";
 import AuthLayout from "./layouts/auth-layout";
 import LoginPage from "./routes/pages/auth/login";
@@ -23,6 +23,7 @@ import DivisionPage from "./routes/pages/division/division";
 import BranchPage from "./routes/pages/branch/branch";
 import BeatOfficePage from "./routes/pages/beat-office/beat-office";
 import CreateBeatOffice from "./routes/pages/beat-office/create";
+import AssignedComplaints from "./routes/pages/complaints/assigned-complaints/assigned-complaints";
 
 function App() {
   return (
@@ -34,8 +35,11 @@ function App() {
         </Route>
         <Route path="/" element={<MainLayout />}>
           <Route path="dashboard" element={<DashboardPage />} />
-          <Route path="new-complaint" element={<SubmitComplaintPage />} />
-          <Route path="my-complaints" element={<MyComplaints />} />
+          <Route path="complaints">
+            <Route path="assigned-complaints" element={<AssignedComplaints />} />
+            <Route path="new-complaint" element={<SubmitComplaintPage />} />
+            <Route path="my-complaints" element={<MyComplaints />} />
+          </Route>
           <Route path="users">
             <Route index element={<UsersPage />} />
             <Route path="all">

@@ -13,8 +13,8 @@ const AdminLinks = () => {
         Dashboard
       </Link>
       <Link
-        to={"/all-complaints"}
-        className={`nav-link ${pathname === "/all-complaints" ? "active" : ""}`}
+        to={"/complaints/all-complaints"}
+        className={`nav-link ${pathname === "/complaints/all-complaints" ? "active" : ""}`}
       >
         All Complaints
       </Link>
@@ -58,12 +58,12 @@ const AdminLinks = () => {
       >
         Beat Offices
       </Link>
-      <Link
+      {/* <Link
         to={"/contact"}
         className={`nav-link ${pathname === "/contact" ? "active" : ""}`}
       >
         Contact
-      </Link>
+      </Link> */}
       <Link
         to={"/reports"}
         className={`nav-link ${

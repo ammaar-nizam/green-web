@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { complaints } from "../../../data/dummy-data";
-import { API_URL } from "../../../config/config";
-import useAuthToken from "../../../hooks/useAuthToken";
-import { ErrorMessage, InfoMessage } from "../../../components/alert-message";
-import Loader from "../../../components/loader";
+import useAuthToken from "../../../../hooks/useAuthToken";
+import { ErrorMessage, InfoMessage } from "../../../../components/alert-message";
+import Loader from "../../../../components/loader";
+import { API_URL } from "../../../../config/config";
 
-const MyComplaints = () => {
+const AssignedComplaints = () => {
   const [loading, setLoading] = useState(false);
   const { accessToken } = useAuthToken();
   const [data, setData] = useState(null);
@@ -95,4 +94,4 @@ const MyComplaints = () => {
   );
 };
 
-export default MyComplaints;
+export default AssignedComplaints;

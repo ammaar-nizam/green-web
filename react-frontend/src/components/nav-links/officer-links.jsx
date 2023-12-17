@@ -15,13 +15,21 @@ const OfficerLinks = () => {
         Dashboard
       </Link>
       <Link
+        to={"/complaints/assigned-complaints"}
+        className={`nav-item nav-link ${
+          pathname === "/complaints/assigned-complaints" ? "active" : ""
+        }`}
+      >
+        Assigned Complaints
+      </Link>
+      {/* <Link
         to={"/contact"}
         className={`nav-item nav-link ${
           pathname === "/contact" ? "active" : ""
         }`}
       >
         Contact
-      </Link>
+      </Link> */}
       <Link
         to={"/reports"}
         className={`nav-link ${
