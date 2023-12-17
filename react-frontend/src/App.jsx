@@ -15,6 +15,9 @@ import CreateUserPage from "./routes/pages/users/create";
 import CreatePublicUserPage from "./routes/pages/users/create/public-user";
 import CreateAdminUserPage from "./routes/pages/users/create/admin-user";
 import CreateBeatOfficerPage from "./routes/pages/users/create/beat-officer";
+import AdminUsersPage from "./routes/pages/users/users/admins";
+import PublicUsersPage from "./routes/pages/users/users/public";
+import BeatOfficesPage from "./routes/pages/users/users/beat-officers";
 
 function App() {
   return (
@@ -30,7 +33,12 @@ function App() {
           <Route path="my-complaints" element={<MyComplaints />} />
           <Route path="users" >
             <Route index element={<UsersPage />} />
-            <Route path="all" element={<AllUsersPage />} />
+            <Route path="all" >
+              <Route index element={<AllUsersPage />} />
+              <Route path="public" element={<PublicUsersPage />} />
+              <Route path="beat-officer" element={<BeatOfficesPage />} />
+              <Route path="admin" element={<AdminUsersPage />} />
+            </Route>
             <Route path="create" >
               <Route index element={<CreateUserPage />} />
               <Route path="public" element={<CreatePublicUserPage />} />
