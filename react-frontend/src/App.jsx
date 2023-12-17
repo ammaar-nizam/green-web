@@ -24,6 +24,7 @@ import BranchPage from "./routes/pages/branch/branch";
 import BeatOfficePage from "./routes/pages/beat-office/beat-office";
 import CreateBeatOffice from "./routes/pages/beat-office/create";
 import AssignedComplaints from "./routes/pages/complaints/assigned-complaints/assigned-complaints";
+import AllComplaints from "./routes/pages/complaints/all-complaints/all-complaints";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
         <Route path="/" element={<MainLayout />}>
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="complaints">
+            <Route path="all-complaints" element={<AllComplaints />} />
             <Route path="assigned-complaints" element={<AssignedComplaints />} />
             <Route path="new-complaint" element={<SubmitComplaintPage />} />
             <Route path="my-complaints" element={<MyComplaints />} />
