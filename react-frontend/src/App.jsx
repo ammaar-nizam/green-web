@@ -21,6 +21,8 @@ import BeatOfficesPage from "./routes/pages/users/users/beat-officers";
 import InstitutionPage from "./routes/pages/institution/institution";
 import DivisionPage from "./routes/pages/division/division";
 import BranchPage from "./routes/pages/branch/branch";
+import BeatOfficePage from "./routes/pages/beat-office/beat-office";
+import CreateBeatOffice from "./routes/pages/beat-office/create";
 
 function App() {
   return (
@@ -52,6 +54,10 @@ function App() {
           <Route path="institutions" element={<InstitutionPage />} />
           <Route path="divisions" element={<DivisionPage />} />
           <Route path="branches" element={<BranchPage />} />
+          <Route path="beat-offices">
+            <Route index element={<BeatOfficePage />} />
+            <Route path="create" element={<CreateBeatOffice />} />
+          </Route>
 
           <Route path="reports">
             <Route index element={<Reports />} />
