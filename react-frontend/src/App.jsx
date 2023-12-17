@@ -13,6 +13,7 @@ import UsersPage from "./routes/pages/users/users";
 import AllUsersPage from "./routes/pages/users/all";
 import CreateUserPage from "./routes/pages/users/create";
 import CreatePublicUserPage from "./routes/pages/users/create/public-user";
+import CreateAdminUserPage from "./routes/pages/users/create/admin-user";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path="create" >
               <Route index element={<CreateUserPage />} />
               <Route path="public" element={<CreatePublicUserPage />} />
+              <Route path="admin" element={<CreateAdminUserPage />} />
             </Route>
           </Route>
 

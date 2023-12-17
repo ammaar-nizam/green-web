@@ -47,7 +47,7 @@ const CreateUserPage = () => {
         </div>
 
         <div className="col-md-3 mt-3 text-center">
-          <Link to="/users/create/public" className="">
+          <Link to="/users/create/admin" className="">
             <div className="card">
               <div className="d-flex justify-content-center p-3">
                 <img
