@@ -15,7 +15,6 @@ const LoginPage = () => {
     { value: "publicUser", label: "Public User" },
     { value: "beatOfficer", label: "Beat Officer" },
     { value: "admin", label: "Admin User" },
-    { value: "superAdmin", label: "Super Admin" },
   ];
 
   const handleEmailChange = (event) => {
