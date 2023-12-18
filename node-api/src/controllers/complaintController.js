@@ -83,11 +83,18 @@ function getAllComplaints(req, res){
 // Update complaint by Id
 function updateComplaintById(req, res){
     const id = req.params.id;
-    const updatedComplaint = {
-        status: req.body.status,
-        beatOfficerId: req.body.beatOfficerId,
-        adminId: req.user.id,
-        beatOfficeId: req.body.beatOfficeId,
+    let updatedComplaint = null;
+    if (Object.keys(req.body).length == 1 && req.body.hasOwnProperty('status')) {
+        updatedComplaint = {
+            status: req.body.status,
+        }
+    } else {
+        updatedComplaint = {
+            status: req.body.status,
+            beatOfficerId: req.body.beatOfficerId,
+            adminId: req.user.id,
+            beatOfficeId: req.body.beatOfficeId,
+        }
     }
     models.Complaint.update(updatedComplaint, {where: {id: id}}).then((data) => {
         if(data){

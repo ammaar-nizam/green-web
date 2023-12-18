@@ -18,7 +18,7 @@ const UsersPage = () => {
                 />
               </div>
               <div className="card-body">
-                <h5 className="card-title">All Users</h5>
+                <h5 className="card-title">View Users</h5>
                 <h6 className="card-subtitle mb-2 text-muted">
                   List of all application users
                 </h6>
