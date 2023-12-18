@@ -72,31 +72,49 @@ function getAllBranches(req, res){
     });
 }
 
-// Sequelize raw query to get divisions that belong to a given institution (i.e., Wildlife or Forestry and Environmental)
+// Sequelize raw query to get branches that belong to a given division
 function getAllBranchesByDivisionId(req, res){
-    console.log("1");
-    const query = `
-    SELECT DISTINCT b.name 
-    FROM beatoffices bo
-    LEFT JOIN branches b ON bo.branchId = b.id
-    LEFT JOIN divisions d ON bo.divisionId = d.id
-    LEFT JOIN institutions i ON bo.institutionId = i.id
-    WHERE d.id = :id;
-    `;
-    console.log("Hoooo");
     const divisionId = req.params.id;
-    sequelize.query(query, {
-        type: QueryTypes.SELECT,
-        replacements: { divisionId },
-    }).then(data => {
+    const query = `
+            SELECT b.name 
+            FROM beatoffices bo
+            LEFT JOIN branches b ON bo.branchId = b.id
+            LEFT JOIN divisions d ON bo.divisionId = d.id
+            LEFT JOIN institutions i ON bo.institutionId = i.id
+            WHERE d.id = ?;
+            `;
+    models.sequelize.query(query, {
+        type: models.sequelize.QueryTypes.SELECT,
+        replacements: [divisionId]
+    }).then((data) => {
         res.status(200).json(data);
-    }).catch(err => {
+    }).catch((err) => {
         res.status(500).json({
             message: "Error retrieving all branches for the given division.",
             error: err
         });
     });
-    console.log("2");
 }
 
-module.exports = {create, getBranchById, getAllBranches, getAllBranchesByDivisionId}
+// Sequelize raw query to count number of complaints in each branch
+function countComplaintsPerEachBranch(req, res){
+    const query = `
+            SELECT c.beatOfficeId AS beatOfficeId, COUNT(c.id) AS totalPerBeatOffice
+            FROM complaints c
+            GROUP BY c.beatOfficeId;
+            `;
+    models.sequelize.query(query, {
+        type: models.sequelize.QueryTypes.SELECT
+    }).then((data) => {
+        res.status(200).json(data);
+    }).catch((err) => {
+        res.status(500).json({
+            message: "Error counting complaints per beat office.",
+            error: err
+        });
+    });
+}
+
+module.exports = {create, getBranchById, getAllBranches, getAllBranchesByDivisionId,
+    countComplaintsPerEachBranch
+}
