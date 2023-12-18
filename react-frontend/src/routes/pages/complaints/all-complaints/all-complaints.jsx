@@ -129,42 +129,47 @@ const AllComplaints = () => {
           <SuccessMessage message={success} />
         </div>
       )}
-      <table className="table">
-        <thead>
-          <tr>
-            {allKeys.map((item, index) => (
-              <th key={index} scope="col" className="text-uppercase">
-                {item}
+      <div className="d-md-flex justify-content-between">
+        <h2 className="">All Complaints</h2>
+      </div>
+      <div className="mt-5">
+        <table className="table">
+          <thead>
+            <tr>
+              {allKeys.map((item, index) => (
+                <th key={index} scope="col" className="text-uppercase">
+                  {item}
+                </th>
+              ))}
+              <th scope="col" className="text-uppercase">
+                Date Complained
               </th>
-            ))}
-            <th scope="col" className="text-uppercase">
-              Date Complained
-            </th>
-            <th scope="col" className="text-uppercase">
-              Actions
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((complaint, index) => (
-            <tr key={index}>
-              <th scope="row">{complaint.id}</th>
-              <td>{complaint.description ?? "N/A"}</td>
-              <td>{complaint.status ?? "N/A"}</td>
-              <td>{complaint.beatOfficeId ?? "N/A"}</td>
-              <td>{dateFormat(complaint.createdAt) ?? "N/A"}</td>
-              <td>
-                <button
-                  onClick={() => handleEdit(complaint.id)}
-                  className="btn"
-                >
-                  <FaRegEdit className="mb-1" />
-                </button>
-              </td>
+              <th scope="col" className="text-uppercase">
+                Actions
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {data.map((complaint, index) => (
+              <tr key={index}>
+                <th scope="row">{complaint.id}</th>
+                <td>{complaint.description ?? "N/A"}</td>
+                <td>{complaint.status ?? "N/A"}</td>
+                <td>{complaint.beatOfficeId ?? "N/A"}</td>
+                <td>{dateFormat(complaint.createdAt) ?? "N/A"}</td>
+                <td>
+                  <button
+                    onClick={() => handleEdit(complaint.id)}
+                    className="btn"
+                  >
+                    <FaRegEdit className="mb-1" />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

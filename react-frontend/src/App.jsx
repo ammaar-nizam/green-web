@@ -25,6 +25,9 @@ import BeatOfficePage from "./routes/pages/beat-office/beat-office";
 import CreateBeatOffice from "./routes/pages/beat-office/create";
 import AssignedComplaints from "./routes/pages/complaints/assigned-complaints/assigned-complaints";
 import AllComplaints from "./routes/pages/complaints/all-complaints/all-complaints";
+import InvestigationsPage from "./routes/pages/investigations/investigations";
+import CreateInvestigation from "./routes/pages/investigations/create";
+import UpdateInvestigation from "./routes/pages/investigations/update";
 
 function App() {
   return (
@@ -41,6 +44,11 @@ function App() {
             <Route path="assigned-complaints" element={<AssignedComplaints />} />
             <Route path="new-complaint" element={<SubmitComplaintPage />} />
             <Route path="my-complaints" element={<MyComplaints />} />
+          </Route>
+          <Route path="investigations">
+            <Route index element={<InvestigationsPage />} />
+            <Route path="create" element={<CreateInvestigation/>} />
+            <Route path="update/:id" element={<UpdateInvestigation/>} />
           </Route>
           <Route path="users">
             <Route index element={<UsersPage />} />

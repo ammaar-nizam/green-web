@@ -19,6 +19,14 @@ const AdminLinks = () => {
         All Complaints
       </Link>
       <Link
+        to={"/investigations"}
+        className={`nav-link ${
+          currentURL.includes("/investigations") ? "active" : ""
+        }`}
+      >
+        Investigations
+      </Link>
+      <Link
         to={"/users"}
         className={`nav-link ${
           currentURL.includes("/users") ? "active" : ""
