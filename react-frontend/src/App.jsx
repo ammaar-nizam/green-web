@@ -1,35 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import SubmitComplaintPage from "./routes/pages/complaints/submit-complaint"
+import MainLayout from "./layouts/main-layout"
+import Reports from "./routes/pages/reports/reports"
+import AllUserReport from "./routes/pages/reports/all-user-report"
+import AllComplaintReport from "./routes/pages/reports/all-complaint-report"
+import MyComplaints from "./routes/pages/my-complaints/my-complaints"
+import DashboardPage from "./routes/pages/dashboard/dashboard"
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+   <BrowserRouter>
+     <Routes>
+     <Route path="/" element={<MainLayout />}>
+      <Route path="dashboard" element={<DashboardPage/>}/>
+      <Route path="new-complaint" element={<SubmitComplaintPage/>}/>
+      <Route path="my-complaints" element={<MyComplaints/>}/>
+      
+      <Route path="reports">
+        <Route index element={<Reports/>}/>
+        <Route path="all-user-report" element={<AllUserReport/>}/>
+        <Route path="all-complaint-report" element={<AllComplaintReport/>}/>
+      </Route>
+     </Route>
+     </Routes>
+   </BrowserRouter>
+    )
 }
 
 export default App

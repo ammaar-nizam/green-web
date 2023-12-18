@@ -1,4 +1,5 @@
 const models = require('../models');
+const notificationController = require('./notificationController');
 const multer = require('multer')
 const path = require('path')
 const {validator, schemaForCheckingDescription} = require('../utils/validation');
@@ -8,6 +9,7 @@ function create(req, res){
    const complaint = {
         description: req.body.description,
         evidence: req.file.filename,
+        location: req.body.location,
         beatOfficeId: req.body.beatOfficeId,
         location: req.body.location,
         status: 'NEW',
@@ -81,29 +83,50 @@ function getAllComplaints(req, res){
     });
 }
 
-// Update complaint by Id
-function updateComplaintById(req, res){
+
+    // Update complaint by Id
+    function updateComplaintById(req, res){
     const id = req.params.id;
-    const updatedComplaint = {
-        status: req.body.status,
-        beatOfficerId: req.body.beatOfficerId,
-        adminId: req.user.id,
-        beatOfficeId: req.body.beatOfficeId,
-    }
-    models.Complaint.update(updatedComplaint, {where: {id: id}}).then((data) => {
-        if(data){
-            res.status(200).json({
-                message: "Complaint updated successfully.",
-                complaint: updatedComplaint
-            });
-        }else{
-            res.status(404).json({
+
+    // Fetch the complaint details including publicUserId
+    models.Complaint.findByPk(id).then((complaint) => {
+        if (!complaint) {
+            return res.status(404).json({
                 message: "Complaint not found"
             });
         }
+
+        const updatedComplaint = {
+            status: req.body.status,
+            beatOfficerId: req.body.beatOfficerId,
+            adminId: req.user.id,
+            beatOfficeId: req.body.beatOfficeId,
+        }
+
+        // Trigger notification to public user
+        notificationController.sendComplaintStatusNotification(complaint.publicUserId, req.body.status, id);
+
+        // Update the complaint
+        models.Complaint.update(updatedComplaint, { where: { id: id } }).then((data) => {
+            if (data) {
+                res.status(200).json({
+                    message: "Complaint updated successfully.",
+                    complaint: updatedComplaint
+                });
+            } else {
+                res.status(404).json({
+                    message: "Complaint not found"
+                });
+            }
+        }).catch((err) => {
+            res.status(500).json({
+                message: "Error updating the complaint.",
+                error: err
+            });
+        });
     }).catch((err) => {
         res.status(500).json({
-            message: "Error updating the complaint.",
+            message: "Error fetching complaint details.",
             error: err
         });
     });
@@ -151,7 +174,7 @@ const upload = multer({
         if(mimeType && extname) {
             return cb(null, true)
         }
-        cb('Give proper files formate to upload')
+        cb('Give proper files format to upload')
     }
 }).single('file');
 

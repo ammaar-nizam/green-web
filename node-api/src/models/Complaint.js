@@ -8,6 +8,9 @@ module.exports = (sequelize, DataTypes) => {
     location: {
         type: DataTypes.TEXT('long')
     },
+    location: {
+      type: DataTypes.TEXT('long')
+    },
     evidence: {
         type: DataTypes.STRING
     },
