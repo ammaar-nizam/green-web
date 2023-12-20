@@ -178,6 +178,7 @@ const upload = multer({
     }
 }).single('file');
 
+
 module.exports = {
     create, upload, getComplaintById, getAllComplaintsByPublicUserId, getAllComplaints, 
     updateComplaintById, deleteComplaintById
