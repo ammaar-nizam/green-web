@@ -1,14 +1,14 @@
-const models = require('../models');
-const {validator, schemaForInstitutionAndDivisionAndBranch} = require('../utils/validation');
+const models = require('../models'); 
+const {validator, schemaForInstitutionAndDivisionAndBranch} = require('../utils/validation'); 
 
-// Create institution
-function create(req, res){
-    const institution = {
-        name: req.body.name
+// Create institution 
+function create(req, res){ 
+    const institution = { 
+        name: req.body.name 
     }
     // Validate user input
-    const validationResponse = validator.validate(institution, schemaForInstitutionAndDivisionAndBranch);
-    if(validationResponse !== true){
+    const validationResponse = validator.validate(institution, schemaForInstitutionAndDivisionAndBranch); 
+    if(validationResponse !== true){ 
         res.status(400).json({
             message: "Validation failed.",
             errors: validationResponse
