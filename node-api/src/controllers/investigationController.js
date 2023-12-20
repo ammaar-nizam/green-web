@@ -3,12 +3,31 @@ const { validator, schemaForCheckingDescription } = require('../utils/validation
 
 
 // Get all investigations
-function getAllInvestigations(req, res){
+function getAllInvestigations(req, res) {
     models.Investigation.findAll().then((data) => {
         res.status(200).json(data);
     }).catch((err) => {
         res.status(500).json({
             message: "Error retrieving all investigations.",
+            error: err
+        });
+    });
+}
+
+// Get investigation by Investigation Id
+function getInvestigationById(req, res) {
+    const id = req.params.id;
+    models.Investigation.findByPk(id).then((data) => {
+        if (data) {
+            res.status(200).json(data);
+        } else {
+            res.status(404).json({
+                message: "Investigation not found"
+            });
+        }
+    }).catch((err) => {
+        res.status(500).json({
+            message: "Error retrieving the investigation.",
             error: err
         });
     });
@@ -45,5 +64,6 @@ function create(req, res) {
 module.exports = {
     create,
     getAllInvestigations,
+    getInvestigationById,
     
 }
