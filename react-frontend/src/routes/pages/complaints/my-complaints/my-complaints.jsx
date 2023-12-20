@@ -3,6 +3,7 @@ import useAuthToken from "../../../../hooks/useAuthToken";
 import { ErrorMessage, InfoMessage } from "../../../../components/alert-message";
 import Loader from "../../../../components/loader";
 import { API_URL } from "../../../../config/config";
+import { dateFormat } from "../../../../utils/utils";
 
 const MyComplaints = () => {
   const [loading, setLoading] = useState(false);
@@ -84,8 +85,9 @@ const MyComplaints = () => {
             <tr key={index}>
               <th scope="row">{complaint.id}</th>
               <td>{complaint.description ?? 'N/A'}</td>
+              <td>{complaint.location ? (<a className="link-primary link-underline link-underline-opacity-0" href={complaint.location} target="_blank">View Location</a>) : 'N/A'}</td>
               <td>{complaint.status ?? 'N/A'}</td>
-              <td>{complaint.createdAt ?? 'N/A'}</td>
+              <td>{dateFormat(complaint.createdAt) ?? 'N/A'}</td>
             </tr>
           ))}
         </tbody>
