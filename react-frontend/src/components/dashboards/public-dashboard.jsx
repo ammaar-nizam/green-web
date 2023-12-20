@@ -46,9 +46,9 @@ const PublicDashboard = () => {
       {error && <ErrorMessage message={error} />}
       <div className="d-flex">
         <div className="col-12 col-md-8 px-3">
-          <div className="row d-md-none">
+          {/* <div className="row d-md-none">
             <Notifications notifications={notifications} />
-          </div>
+          </div> */}
           <div className="row pt-2">
             <div className="card">
               <div className="card-body">
@@ -73,9 +73,9 @@ const PublicDashboard = () => {
           </div>
           <div className="row px-md-3"></div>
         </div>
-        <div className="col-4 d-none d-md-block p-2">
+        {/* <div className="col-4 d-none d-md-block p-2">
           <Notifications notifications={notifications} />
-        </div>
+        </div> */}
       </div>
     </div>
   );
