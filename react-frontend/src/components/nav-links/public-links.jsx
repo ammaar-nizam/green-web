@@ -1,9 +1,8 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
-const OfficerLinks = () => {
+const PublicLinks = () => {
   const { pathname } = useLocation();
-  const currentURL = window.location.href;
   return (
     <>
       <Link
@@ -15,12 +14,20 @@ const OfficerLinks = () => {
         Dashboard
       </Link>
       <Link
-        to={"/complaints/assigned-complaints"}
+        to={"/complaints/new-complaint"}
         className={`nav-item nav-link ${
-          pathname === "/complaints/assigned-complaints" ? "active" : ""
+          pathname === "/complaints/new-complaint" ? "active" : ""
         }`}
       >
-        Assigned Complaints
+        New Complaint
+      </Link>
+      <Link
+        to={"/complaints/my-complaints"}
+        className={`nav-item nav-link ${
+          pathname === "/complaints/my-complaints" ? "active" : ""
+        }`}
+      >
+        My Complaints
       </Link>
       {/* <Link
         to={"/contact"}
@@ -30,16 +37,8 @@ const OfficerLinks = () => {
       >
         Contact
       </Link> */}
-      <Link
-        to={"/reports"}
-        className={`nav-link ${
-          currentURL.includes("/reports") ? "active" : ""
-        }`}
-      >
-        Reports
-      </Link>
     </>
   );
 };
 
-export default OfficerLinks;
+export default PublicLinks;
