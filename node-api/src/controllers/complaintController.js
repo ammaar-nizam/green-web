@@ -103,7 +103,8 @@ function getAllComplaints(req, res){
             beatOfficeId: req.body.beatOfficeId,
         }
 
-       
+        // Trigger notification to public user
+        notificationController.sendComplaintStatusNotification(complaint.publicUserId, req.body.status, id);
 
         // Update the complaint
         models.Complaint.update(updatedComplaint, { where: { id: id } }).then((data) => {
