@@ -31,6 +31,21 @@ function create(req, res){
      }  
  }
 
+ // Get complaints by Public User Id
+function getAllComplaintsByPublicUserId(req, res){
+    const publicUserId = req.user.id;
+    models.Complaint.findAll({
+        where : {publicUserId: publicUserId}
+    }).then((data) => {
+        res.status(200).json(data);
+    }).catch((err) => {
+        res.status(500).json({
+            message: "Error retrieving all complaints.",
+            error: err
+        });
+    });
+}
+
  module.exports = {
-    create
+    create,getAllComplaintsByPublicUserId
 } 
