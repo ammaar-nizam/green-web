@@ -1,6 +1,19 @@
 const models = require('../models');
 const { validator, schemaForCheckingDescription } = require('../utils/validation');
 
+
+// Get all investigations
+function getAllInvestigations(req, res){
+    models.Investigation.findAll().then((data) => {
+        res.status(200).json(data);
+    }).catch((err) => {
+        res.status(500).json({
+            message: "Error retrieving all investigations.",
+            error: err
+        });
+    });
+}
+
 // Create investigation
 function create(req, res) {
     const investigation = {
@@ -30,5 +43,7 @@ function create(req, res) {
 }
 
 module.exports = {
-    create
+    create,
+    getAllInvestigations,
+    
 }
