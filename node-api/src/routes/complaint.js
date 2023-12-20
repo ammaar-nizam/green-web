@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const complaintController = require('../controllers/complaintController'); 
-const authorization = require('../middleware/authorization'); 
-const imageUploader = require('../middleware/image-uploader'); 
+const authorization = require('../middleware/authorization');
 
 router.post("/", authorization.verifyToken, complaintController.upload, complaintController.create);
 router.get("/my-complaints", authorization.verifyToken, complaintController.getAllComplaintsByPublicUserId);
