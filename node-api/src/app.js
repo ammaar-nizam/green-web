@@ -11,11 +11,9 @@ const complaintRoute = require('./routes/complaint');
 const divisionRoute = require('./routes/division');
 const institutionRoute = require('./routes/institution');
 const investigationRoute = require('./routes/investigation');
-// const notificationRoute = require('./routes/notification');
 const publicUserRoute = require('./routes/publicUser');
 const registrationRoute = require('./routes/registration');
 const roleRoute = require('./routes/role');
-const commonRoute = require("./routes/commonRoute");
 
 const cors = require("cors");
 
@@ -34,11 +32,9 @@ app.use("/api/complaints", complaintRoute);
 app.use("/api/divisions", divisionRoute);
 app.use("/api/institutions", institutionRoute);
 app.use("/api/investigations", investigationRoute);
-// app.use("/api/notifications", notificationRoute);
 app.use("/api/public-users", publicUserRoute);
 app.use("/api/registrations", registrationRoute);
 app.use("/api/roles", roleRoute);
-app.use("/api", commonRoute);
 
 app.use('/uploads', express.static('./uploads'))
 
