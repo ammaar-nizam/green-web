@@ -8,9 +8,9 @@ const DashboardPage = () => {
   const { roleId } = useAuthToken();
   return (
     <>
-      {roleId === 1 && <PublicDashboard />}
-      {roleId === 2 && <AdminDashboard />}
-      {roleId === 3 && <OfficerDashboard />}
+      {roleId == 1 && <PublicDashboard />}
+      {roleId == 2 && <AdminDashboard />}
+      {roleId == 3 && <OfficerDashboard />}
     </>
   );
 };

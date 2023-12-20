@@ -33,9 +33,9 @@ const Navbar = () => {
       </button>
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div className="navbar-nav">
-          {roleId === 1 && <PublicLinks />}
-          {roleId === 2 && <AdminLinks />}
-          {roleId === 3 && <OfficerLinks />}
+          {roleId == 1 && <PublicLinks />}
+          {roleId == 2 && <AdminLinks />}
+          {roleId == 3 && <OfficerLinks />}
         </div>
       </div>
       <div className="d-none d-md-flex">
