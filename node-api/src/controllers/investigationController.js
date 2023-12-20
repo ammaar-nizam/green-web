@@ -33,6 +33,20 @@ function getInvestigationById(req, res) {
     });
 }
 
+// Get investigations by Complaint Id
+function getInvestigationByComplaintId(req, res) {
+    models.Investigation.findOne({
+        where: { complaintId: req.body.complaintId }
+    }).then((data) => {
+        res.status(200).json(data);
+    }).catch((err) => {
+        res.status(500).json({
+            message: "Error retrieving the investigation.",
+            error: err
+        });
+    });
+}
+
 // Create investigation
 function create(req, res) {
     const investigation = {
@@ -65,5 +79,6 @@ module.exports = {
     create,
     getAllInvestigations,
     getInvestigationById,
+    getInvestigationByComplaintId,
     
 }
