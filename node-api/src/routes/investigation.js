@@ -10,9 +10,10 @@ router.get("/complaints/:id", authorization.verifyTokenAndBeatOfficer, investiga
 // post routes
 router.post("/", authorization.verifyTokenAndAdmin, investigationController.upload, investigationController.create);
 
-// patch route
+// patch routes
 router.patch("/:id", authorization.verifyTokenAndBeatOfficer, investigationController.updateInvestigationById);
 
-
+// delete routes
+router.delete("/:id", authorization.verifyTokenAndAdmin, investigationController.deleteInvestigationById);
 
 module.exports = router; 

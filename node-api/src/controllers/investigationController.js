@@ -1,6 +1,7 @@
 const models = require('../models');
+const multer = require('multer')
+const path = require('path')
 const { validator, schemaForCheckingDescription } = require('../utils/validation');
-
 
 // Get all investigations
 function getAllInvestigations(req, res) {
@@ -101,6 +102,27 @@ function updateInvestigationById(req, res) {
     });
 }
 
+// Delete investigation by Id
+function deleteInvestigationById(req, res){
+    const id = req.params.id;
+    models.Investigation.destroy({where: {id:id}}).then((data) => {
+        if(data){
+            res.status(200).json({
+                message: "Investigation deleted successfully."
+            });
+        }else{
+            res.status(404).json({
+                message: "Investigation not found"
+            });
+        }      
+    }).catch((err) => {
+        res.status(500).json({
+            message: "Error deleting the investigation.",
+            error: err
+        });
+    });
+}
+
 // Middleware using multer
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -132,4 +154,6 @@ module.exports = {
     getInvestigationById,
     getInvestigationByComplaintId,
     updateInvestigationById,
+    deleteInvestigationById,
+    upload,
 }
